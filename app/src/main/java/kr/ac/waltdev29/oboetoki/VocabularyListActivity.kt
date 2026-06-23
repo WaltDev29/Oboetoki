@@ -6,27 +6,48 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import kotlinx.coroutines.launch
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
+import android.view.View
 import kr.ac.waltdev29.oboetoki.data.api.RetrofitClient
 import kr.ac.waltdev29.oboetoki.data.model.Word
 import kr.ac.waltdev29.oboetoki.databinding.ActivityVocabularyListBinding
 import kr.ac.waltdev29.oboetoki.util.PreferenceManager
 
-class VocabularyListActivity : AppCompatActivity() {
+class VocabularyListActivity : BaseNavigationActivity() {
 
     private lateinit var binding: ActivityVocabularyListBinding
-    private lateinit var preferenceManager: PreferenceManager
     private lateinit var adapter: VocabularyAdapter
+    private var isOcrMode = false
+    private var parsedWords: List<Word> = emptyList()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityVocabularyListBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        preferenceManager = PreferenceManager(this)
-
         setupRecyclerView()
-        setupBottomNavigation()
-        fetchWords()
+
+        val ocrJson = intent.getStringExtra("ocr_words")
+        if (!ocrJson.isNullOrEmpty()) {
+            isOcrMode = true
+            val type = object : TypeToken<List<Word>>() {}.type
+            parsedWords = Gson().fromJson(ocrJson, type)
+            adapter.updateData(parsedWords)
+
+            binding.bottomNavigationView.visibility = View.GONE
+            binding.bottomLayout.visibility = View.VISIBLE
+
+            binding.btnSaveBatch.setOnClickListener {
+                saveWordsBatch()
+            }
+            binding.btnCancel.setOnClickListener {
+                finish()
+            }
+        } else {
+            setupBottomNavigation(binding.bottomNavigationView, R.id.nav_vocabulary)
+            fetchWords()
+        }
     }
 
     private fun setupRecyclerView() {
@@ -37,40 +58,16 @@ class VocabularyListActivity : AppCompatActivity() {
         binding.recyclerView.adapter = adapter
     }
 
-    private fun setupBottomNavigation() {
-        binding.bottomNavigationView.selectedItemId = R.id.nav_vocabulary
-
-        binding.bottomNavigationView.setOnItemSelectedListener { item ->
-            when (item.itemId) {
-                R.id.nav_home -> {
-                    val intent = Intent(this, MainActivity::class.java)
-                    intent.flags = Intent.FLAG_ACTIVITY_REORDER_TO_FRONT
-                    startActivity(intent)
-                    true
-                }
-                R.id.nav_camera -> {
-                    val intent = Intent(this, CameraActivity::class.java)
-                    intent.flags = Intent.FLAG_ACTIVITY_REORDER_TO_FRONT
-                    startActivity(intent)
-                    true
-                }
-                R.id.nav_vocabulary -> {
-                    // Already here
-                    true
-                }
-                else -> false
-            }
+    override fun onResume() {
+        super.onResume()
+        if (!isOcrMode) {
+            binding.bottomNavigationView.selectedItemId = R.id.nav_vocabulary
+            fetchWords()
         }
     }
 
-    override fun onResume() {
-        super.onResume()
-        binding.bottomNavigationView.selectedItemId = R.id.nav_vocabulary
-        fetchWords()
-    }
-
     private fun fetchWords() {
-        val wordService = RetrofitClient.getWordService(preferenceManager)
+        val wordService = RetrofitClient.getWordService(basePreferenceManager)
         lifecycleScope.launch {
             try {
                 val words = wordService.getWords()
@@ -78,6 +75,27 @@ class VocabularyListActivity : AppCompatActivity() {
             } catch (e: Exception) {
                 e.printStackTrace()
                 Toast.makeText(this@VocabularyListActivity, "단어 목록을 불러오는데 실패했습니다.", Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+
+    private fun saveWordsBatch() {
+        if (parsedWords.isEmpty()) return
+
+        val wordService = RetrofitClient.getWordService(basePreferenceManager)
+        lifecycleScope.launch {
+            try {
+                wordService.addWordsBatch(parsedWords)
+                Toast.makeText(this@VocabularyListActivity, "단어 추가 완료", Toast.LENGTH_SHORT).show()
+                // Return to normal mode
+                isOcrMode = false
+                binding.bottomLayout.visibility = View.GONE
+                binding.bottomNavigationView.visibility = View.VISIBLE
+                setupBottomNavigation(binding.bottomNavigationView, R.id.nav_vocabulary)
+                fetchWords()
+            } catch (e: Exception) {
+                e.printStackTrace()
+                Toast.makeText(this@VocabularyListActivity, "저장 실패: ${e.message}", Toast.LENGTH_SHORT).show()
             }
         }
     }

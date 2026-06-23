@@ -85,4 +85,39 @@
         app:menu="@menu/bottom_nav_menu"
         app:layout_constraintBottom_toBottomOf="parent" />
 
+    <!-- Bottom Actions for OCR Saving -->
+    <LinearLayout
+        android:id="@+id/bottomLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="16dp"
+        android:background="@color/color_ffffff"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <Button
+            android:id="@+id/btnSaveBatch"
+            android:layout_width="0dp"
+            android:layout_height="56dp"
+            android:layout_weight="1"
+            android:text="@string/str_4"
+            android:backgroundTint="@color/color_0058be"
+            android:textColor="@color/color_ffffff"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/btnCancel"
+            android:layout_width="0dp"
+            android:layout_height="56dp"
+            android:layout_weight="1"
+            android:layout_marginStart="16dp"
+            android:text="@string/str_5"
+            android:backgroundTint="@color/color_ffffff"
+            android:textColor="@color/color_ff85b2"
+            android:textStyle="bold"
+            style="?attr/materialButtonOutlinedStyle"
+            app:strokeColor="@color/color_ff85b2" />
+    </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

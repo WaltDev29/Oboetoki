@@ -10,46 +10,17 @@ import kr.ac.waltdev29.oboetoki.data.api.RetrofitClient
 import kr.ac.waltdev29.oboetoki.databinding.ActivityMainBinding
 import kr.ac.waltdev29.oboetoki.util.PreferenceManager
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : BaseNavigationActivity() {
 
     private lateinit var binding: ActivityMainBinding
-    private lateinit var preferenceManager: PreferenceManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        preferenceManager = PreferenceManager(this)
-
-        setupBottomNavigation()
+        setupBottomNavigation(binding.bottomNavigationView, R.id.nav_home)
         fetchMainData()
-    }
-
-    private fun setupBottomNavigation() {
-        binding.bottomNavigationView.selectedItemId = R.id.nav_home
-
-        binding.bottomNavigationView.setOnItemSelectedListener { item ->
-            when (item.itemId) {
-                R.id.nav_home -> {
-                    // Already here
-                    true
-                }
-                R.id.nav_camera -> {
-                    val intent = Intent(this, CameraActivity::class.java)
-                    intent.flags = Intent.FLAG_ACTIVITY_REORDER_TO_FRONT
-                    startActivity(intent)
-                    true
-                }
-                R.id.nav_vocabulary -> {
-                    val intent = Intent(this, VocabularyListActivity::class.java)
-                    intent.flags = Intent.FLAG_ACTIVITY_REORDER_TO_FRONT
-                    startActivity(intent)
-                    true
-                }
-                else -> false
-            }
-        }
     }
 
     override fun onResume() {
@@ -59,7 +30,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun fetchMainData() {
-        val mainService = RetrofitClient.getMainService(preferenceManager)
+        val mainService = RetrofitClient.getMainService(basePreferenceManager)
         lifecycleScope.launch {
             try {
                 val data = mainService.getMainData()

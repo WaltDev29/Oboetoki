@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Oboetoki</string>
+    <string name="str_oboetoki">Oboetoki</string>
     <string name="str_ocr">단어 인식 (OCR)</string>
     <string name="str_1">사진 촬영</string>
     <string name="str_2">갤러리</string>
