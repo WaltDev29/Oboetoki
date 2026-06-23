@@ -75,12 +75,7 @@
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         tools:listitem="@layout/item_vocabulary" />
 
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottomNavigationView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/color_ffffff"
-        app:menu="@menu/bottom_nav_menu" />
+    <include layout="@layout/layout_bottom_navigation" />
 
     <!-- Bottom Actions for OCR Saving -->
     <LinearLayout
