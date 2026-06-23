@@ -5,6 +5,6 @@ import retrofit2.Call;
 import retrofit2.http.GET;
 
 public interface MainService {
-    @GET("/main/")
+    @GET("main/")
     Call<MainData> getMainData();
 }

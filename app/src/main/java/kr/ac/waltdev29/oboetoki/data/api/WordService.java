@@ -17,27 +17,27 @@ import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 public interface WordService {
-    @GET("/words/")
+    @GET("words/")
     Call<List<Word>> getWords(
             @Query("is_memorized") Boolean isMemorized
     );
 
-    @POST("/words/")
+    @POST("words/")
     Call<Word> addWord(@Body Word request);
 
-    @POST("/words/batch")
+    @POST("words/batch")
     Call<List<Word>> addWordsBatch(@Body List<Word> request);
 
-    @GET("/words/{word_id}")
+    @GET("words/{word_id}")
     Call<Word> getWordDetail(@Path("word_id") int wordId);
 
-    @PUT("/words/{word_id}")
+    @PUT("words/{word_id}")
     Call<Word> updateWord(
             @Path("word_id") int wordId,
             @Body HashMap<String, Object> request
     );
 
     @Multipart
-    @POST("/words/ocr")
+    @POST("words/ocr")
     Call<OcrResult> parseOcrWords(@Part MultipartBody.Part file);
 }

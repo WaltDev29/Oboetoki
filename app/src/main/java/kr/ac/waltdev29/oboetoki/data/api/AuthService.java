@@ -14,14 +14,14 @@ import retrofit2.http.POST;
 import retrofit2.http.Query;
 
 public interface AuthService {
-    @POST("/auth/signup")
+    @POST("auth/signup")
     Call<User> signup(@Body HashMap<String, String> request);
 
-    @GET("/auth/check-email")
+    @GET("auth/check-email")
     Call<DuplicateCheckResponse> checkEmail(@Query("email") String email);
 
     @FormUrlEncoded
-    @POST("/auth/login")
+    @POST("auth/login")
     Call<TokenResponse> login(
             @Field("username") String username,
             @Field("password") String password

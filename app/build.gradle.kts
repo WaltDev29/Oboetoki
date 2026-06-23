@@ -16,7 +16,7 @@ android {
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         
-        buildConfigField("String", "BASE_URL", "\"https://nextwave.aikopo.net/oboetoki/api\"")
+        buildConfigField("String", "BASE_URL", "\"https://nextwave.aikopo.net/oboetoki/api/\"")
     }
 
     buildTypes {
