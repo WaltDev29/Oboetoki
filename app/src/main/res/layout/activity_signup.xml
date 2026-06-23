@@ -100,7 +100,7 @@
                 android:layout_marginTop="8dp"
                 android:background="@drawable/bg_input_field"
                 android:paddingHorizontal="16dp"
-                android:hint="@string/str_16"
+                android:hint="비밀번호를 재입력하세요"
                 android:textColorHint="@color/color_80544247"
                 android:textSize="16sp"
                 android:inputType="textPassword" />
