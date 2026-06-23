@@ -183,7 +183,12 @@ public abstract class BaseNavigationActivity extends AppCompatActivity {
                             intent.putExtra("ocr_words", jsonWords);
                             startActivity(intent);
                         } else {
-                            Toast.makeText(BaseNavigationActivity.this, "추출 실패", Toast.LENGTH_SHORT).show();
+                            try {
+                                String errorMsg = response.errorBody() != null ? response.errorBody().string() : "알 수 없는 에러";
+                                Toast.makeText(BaseNavigationActivity.this, "추출 실패 (" + response.code() + "): " + errorMsg, Toast.LENGTH_LONG).show();
+                            } catch (Exception e) {
+                                Toast.makeText(BaseNavigationActivity.this, "추출 실패 (" + response.code() + ")", Toast.LENGTH_LONG).show();
+                            }
                         }
                     }
 

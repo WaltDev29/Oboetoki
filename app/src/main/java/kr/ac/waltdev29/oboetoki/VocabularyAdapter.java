@@ -43,14 +43,14 @@ public class VocabularyAdapter extends RecyclerView.Adapter<VocabularyAdapter.Vi
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Word word = words.get(position);
         
-        String originalText;
+        holder.binding.tvOriginalWord.setText(word.originalWord);
+        
         if (word.reading != null && !word.reading.isEmpty()) {
-            originalText = word.originalWord + " (" + word.reading + ")";
+            holder.binding.tvReading.setText(word.reading);
         } else {
-            originalText = word.originalWord;
+            holder.binding.tvReading.setText("-");
         }
         
-        holder.binding.tvOriginalWord.setText(originalText);
         holder.binding.tvTranslatedWord.setText(word.translatedWord);
         
         holder.binding.getRoot().setOnClickListener(v -> onItemClick.onItemClick(word));

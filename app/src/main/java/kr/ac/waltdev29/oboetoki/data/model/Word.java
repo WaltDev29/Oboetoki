@@ -8,12 +8,12 @@ public class Word {
     @SerializedName("user_id")
     public int userId = 0;
     
-    @SerializedName("original_word")
+    @SerializedName(value = "original_word", alternate = {"original"})
     public String originalWord;
     
     public String reading;
     
-    @SerializedName("translated_word")
+    @SerializedName(value = "translated_word", alternate = {"translated"})
     public String translatedWord;
     
     @SerializedName("source_language")
