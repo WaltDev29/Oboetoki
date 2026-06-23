@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:paddingHorizontal="24dp"
+    android:paddingVertical="16dp"
+    android:background="?attr/selectableItemBackground"
+    android:gravity="center_vertical"
+    android:baselineAligned="false">
+
+    <TextView
+        android:id="@+id/tvOriginalWord"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="@string/str_apple"
+        android:textColor="@color/color_111827"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        android:ellipsize="end"
+        android:maxLines="1" />
+
+    <TextView
+        android:id="@+id/tvTranslatedWord"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="@string/str_40"
+        android:textColor="@color/color_4b5563"
+        android:textSize="14sp"
+        android:ellipsize="end"
+        android:maxLines="1" />
+
+</LinearLayout>
