@@ -75,7 +75,9 @@
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         tools:listitem="@layout/item_vocabulary" />
 
-    <include layout="@layout/layout_bottom_navigation" />
+    <include
+        android:id="@+id/includedBottomNav"
+        layout="@layout/layout_bottom_navigation" />
 
     <!-- Bottom Actions for OCR Saving -->
     <LinearLayout
