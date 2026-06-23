@@ -22,8 +22,8 @@ interface AuthService {
     @POST("/auth/signup")
     suspend fun signup(@Body request: HashMap<String, String>): User
 
-    @GET("/auth/check-username")
-    suspend fun checkUsername(@Query("username") username: String): DuplicateCheckResponse
+    @GET("/auth/check-email")
+    suspend fun checkEmail(@Query("email") email: String): DuplicateCheckResponse
 
     @FormUrlEncoded
     @POST("/auth/login")
@@ -41,8 +41,7 @@ interface MainService {
 interface WordService {
     @GET("/words/")
     suspend fun getWords(
-        @Query("is_memorized") isMemorized: Boolean? = null,
-        @Query("sort_by") sortBy: String? = null
+        @Query("is_memorized") isMemorized: Boolean? = null
     ): List<Word>
 
     @POST("/words/")

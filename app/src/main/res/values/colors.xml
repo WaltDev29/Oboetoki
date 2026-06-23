@@ -18,4 +18,15 @@
     <color name="color_eff6ff">#eff6ff</color>
     <color name="color_111827">#111827</color>
     <color name="color_4b5563">#4b5563</color>
+    
+    <!-- HTML Design Colors -->
+    <color name="splash_grad_start">#d8f3ff</color>
+    <color name="splash_grad_center">#ffffff</color>
+    <color name="splash_grad_end">#ffe0f0</color>
+    <color name="brand_pink_dark">#ff66aa</color>
+    <color name="brand_pink_light">#FF69B4</color>
+    <color name="brand_pink_circle">#ff99cc</color>
+    <color name="bg_attendance_start">#fdf2f8</color>
+    <color name="bg_attendance_end">#fce7f3</color>
+    <color name="color_blue_400">#60A5FA</color>
 </resources>

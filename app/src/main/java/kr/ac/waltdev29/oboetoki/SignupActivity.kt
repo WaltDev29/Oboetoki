@@ -13,7 +13,7 @@ class SignupActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivitySignupBinding
     private lateinit var preferenceManager: PreferenceManager
-    private var isUsernameAvailable = false
+    private var isEmailAvailable = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -22,34 +22,32 @@ class SignupActivity : AppCompatActivity() {
 
         preferenceManager = PreferenceManager(this)
 
-        binding.btnCancel.setOnClickListener {
-            finish()
-        }
+        // Removed btnCancel listener as the button was removed in the layout update
 
-        binding.btnCheckUsername.setOnClickListener {
-            val username = binding.etUsername.text.toString().trim()
-            if (username.isEmpty()) {
-                Toast.makeText(this, "아이디를 입력해주세요.", Toast.LENGTH_SHORT).show()
+        binding.btnCheckEmail.setOnClickListener {
+            val email = binding.etEmail.text.toString().trim()
+            if (email.isEmpty()) {
+                Toast.makeText(this, "이메일을 입력해주세요.", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
-            checkUsername(username)
+            checkEmail(email)
         }
 
-        binding.btnSignup.setOnClickListener {
+        binding.btnSignupComplete.setOnClickListener {
             performSignup()
         }
     }
 
-    private fun checkUsername(username: String) {
+    private fun checkEmail(email: String) {
         val authService = RetrofitClient.getAuthService(preferenceManager)
         lifecycleScope.launch {
             try {
-                val response = authService.checkUsername(username)
-                isUsernameAvailable = response.isAvailable
-                if (isUsernameAvailable) {
-                    Toast.makeText(this@SignupActivity, "사용 가능한 아이디입니다.", Toast.LENGTH_SHORT).show()
+                val response = authService.checkEmail(email)
+                isEmailAvailable = response.isAvailable
+                if (isEmailAvailable) {
+                    Toast.makeText(this@SignupActivity, "사용 가능한 이메일입니다.", Toast.LENGTH_SHORT).show()
                 } else {
-                    Toast.makeText(this@SignupActivity, "이미 사용 중인 아이디입니다.", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@SignupActivity, "이미 사용 중인 이메일입니다.", Toast.LENGTH_SHORT).show()
                 }
             } catch (e: Exception) {
                 e.printStackTrace()
@@ -59,19 +57,18 @@ class SignupActivity : AppCompatActivity() {
     }
 
     private fun performSignup() {
-        if (!isUsernameAvailable) {
-            Toast.makeText(this, "아이디 중복 확인을 해주세요.", Toast.LENGTH_SHORT).show()
+        if (!isEmailAvailable) {
+            Toast.makeText(this, "이메일 중복 확인을 해주세요.", Toast.LENGTH_SHORT).show()
             return
         }
 
-        val username = binding.etUsername.text.toString().trim()
+        val email = binding.etEmail.text.toString().trim()
         val password = binding.etPassword.text.toString().trim()
         val confirmPassword = binding.etPasswordConfirm.text.toString().trim()
         val name = binding.etName.text.toString().trim()
         val phone = binding.etPhone.text.toString().trim()
-        val email = binding.etEmail.text.toString().trim()
 
-        if (username.isEmpty() || password.isEmpty() || name.isEmpty() || phone.isEmpty() || email.isEmpty()) {
+        if (email.isEmpty() || password.isEmpty() || name.isEmpty() || phone.isEmpty()) {
             Toast.makeText(this, "모든 필드를 입력해주세요.", Toast.LENGTH_SHORT).show()
             return
         }
@@ -82,11 +79,10 @@ class SignupActivity : AppCompatActivity() {
         }
 
         val request = hashMapOf(
-            "username" to username,
+            "email" to email,
             "password" to password,
             "name" to name,
-            "phone" to phone,
-            "email" to email
+            "phone" to phone
         )
 
         val authService = RetrofitClient.getAuthService(preferenceManager)

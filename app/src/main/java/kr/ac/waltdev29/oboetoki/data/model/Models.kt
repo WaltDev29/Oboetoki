@@ -4,10 +4,9 @@ import com.google.gson.annotations.SerializedName
 
 data class User(
     val id: Int,
-    val username: String,
+    val email: String,
     val name: String,
     val phone: String,
-    val email: String,
     @SerializedName("consecutive_attendance")
     val consecutiveAttendance: Int,
     @SerializedName("last_login_date")
@@ -38,14 +37,13 @@ data class Word(
     val userId: Int = 0,
     @SerializedName("original_word")
     val originalWord: String,
+    val reading: String? = null,
     @SerializedName("translated_word")
     val translatedWord: String,
     @SerializedName("source_language")
     val sourceLanguage: String? = null,
     @SerializedName("is_memorized")
     val isMemorized: Boolean = false,
-    @SerializedName("memorization_level")
-    val memorizationLevel: Int = 0,
     @SerializedName("created_at")
     val createdAt: String? = null
 )

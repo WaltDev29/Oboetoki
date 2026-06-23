@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     android:background="@color/color_f8f9ff"
     android:padding="24dp">
 
@@ -12,15 +13,12 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:gravity="center_vertical"
-        android:layout_marginTop="32dp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        android:layout_marginTop="32dp">
 
         <ImageView
             android:layout_width="48dp"
             android:layout_height="48dp"
-            android:src="@drawable/ic_logo" />
+            android:src="@drawable/app_logo_pink" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -37,30 +35,27 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_marginTop="48dp"
-        app:layout_constraintTop_toBottomOf="@id/headerLayout"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        android:layout_marginTop="48dp">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/str_7"
+            android:text="이메일"
             android:textColor="@color/color_544247"
             android:textSize="14sp"
             android:textStyle="bold" />
 
         <EditText
-            android:id="@+id/etUsername"
+            android:id="@+id/etEmail"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginTop="8dp"
-            android:background="@color/color_eff4ff"
+            android:background="@drawable/bg_input_field"
             android:paddingHorizontal="16dp"
-            android:hint="@string/str_12"
+            android:hint="이메일을 입력하세요"
             android:textColorHint="@color/color_80544247"
             android:textSize="16sp"
-            android:inputType="text" />
+            android:inputType="textEmailAddress" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -76,7 +71,7 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginTop="8dp"
-            android:background="@color/color_eff4ff"
+            android:background="@drawable/bg_input_field"
             android:paddingHorizontal="16dp"
             android:hint="@string/str_13"
             android:textColorHint="@color/color_80544247"
@@ -94,7 +89,7 @@
 
     </LinearLayout>
 
-    <Button
+        <Button
         android:id="@+id/btnLogin"
         android:layout_width="match_parent"
         android:layout_height="56dp"
@@ -103,8 +98,8 @@
         android:textColor="@color/color_ffffff"
         android:textSize="16sp"
         android:textStyle="bold"
-        android:backgroundTint="@color/color_ff85b2"
-        app:layout_constraintTop_toBottomOf="@id/formLayout" />
+        android:background="@drawable/bg_button_primary"
+        app:backgroundTint="@null" />
 
     <Button
         android:id="@+id/btnSignup"
@@ -115,10 +110,7 @@
         android:textColor="@color/color_ff85b2"
         android:textSize="16sp"
         android:textStyle="bold"
-        android:backgroundTint="@color/color_ffffff"
-        style="?attr/materialButtonOutlinedStyle"
-        app:strokeColor="@color/color_ff85b2"
-        app:strokeWidth="2dp"
-        app:layout_constraintTop_toBottomOf="@id/btnLogin" />
+        android:background="@drawable/bg_button_outline"
+        app:backgroundTint="@null" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

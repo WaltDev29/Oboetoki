@@ -20,7 +20,12 @@ class VocabularyAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val word = words[position]
-        holder.binding.tvOriginalWord.text = word.originalWord
+        val originalText = if (!word.reading.isNullOrEmpty()) {
+            "${word.originalWord} (${word.reading})"
+        } else {
+            word.originalWord
+        }
+        holder.binding.tvOriginalWord.text = originalText
         holder.binding.tvTranslatedWord.text = word.translatedWord
         
         holder.binding.root.setOnClickListener {

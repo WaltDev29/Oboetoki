@@ -23,15 +23,15 @@ class LoginActivity : AppCompatActivity() {
         preferenceManager = PreferenceManager(this)
 
         binding.btnLogin.setOnClickListener {
-            val username = binding.etUsername.text.toString().trim()
+            val email = binding.etEmail.text.toString().trim()
             val password = binding.etPassword.text.toString().trim()
 
-            if (username.isEmpty() || password.isEmpty()) {
-                Toast.makeText(this, "아이디와 비밀번호를 입력해주세요.", Toast.LENGTH_SHORT).show()
+            if (email.isEmpty() || password.isEmpty()) {
+                Toast.makeText(this, "이메일과 비밀번호를 입력해주세요.", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
-            performLogin(username, password)
+            performLogin(email, password)
         }
 
         binding.btnSignup.setOnClickListener {
@@ -40,12 +40,12 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-    private fun performLogin(username: String, password: String) {
+    private fun performLogin(email: String, password: String) {
         val authService = RetrofitClient.getAuthService(preferenceManager)
         lifecycleScope.launch {
             try {
-                // Call API
-                val response = authService.login(username, password)
+                // 백엔드 API 명세서에 따르면 폼의 필드명은 username을 그대로 사용하지만, 실제 값은 이메일을 전송합니다.
+                val response = authService.login(email, password)
                 
                 // Save token if auto login is checked, or just save it for the session
                 // For simplicity, we save it here. You can add logic for auto-login checkbox.
