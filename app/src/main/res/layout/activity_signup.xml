@@ -74,17 +74,32 @@
                 android:text="@string/str_23"
                 android:textStyle="bold" />
 
-            <EditText
-                android:id="@+id/etPassword"
+            <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:layout_marginTop="8dp"
-                android:background="@drawable/bg_input_field"
-                android:hint="@string/str_13"
-                android:inputType="textPassword"
-                android:paddingHorizontal="16dp"
-                android:textColorHint="@color/color_80544247"
-                android:textSize="16sp" />
+                android:layout_marginTop="8dp">
+
+                <EditText
+                    android:id="@+id/etPassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/bg_input_field"
+                    android:hint="@string/str_13"
+                    android:inputType="textPassword"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="48dp"
+                    android:textColorHint="@color/color_80544247"
+                    android:textSize="16sp" />
+
+                <ImageButton
+                    android:id="@+id/btnTogglePassword"
+                    android:layout_width="48dp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="end|center_vertical"
+                    android:src="@drawable/ic_eye_off"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    app:tint="@color/color_6b7280" />
+            </FrameLayout>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -93,17 +108,32 @@
                 android:text="@string/str_24"
                 android:textStyle="bold" />
 
-            <EditText
-                android:id="@+id/etPasswordConfirm"
+            <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:layout_marginTop="8dp"
-                android:background="@drawable/bg_input_field"
-                android:hint="비밀번호를 재입력하세요"
-                android:inputType="textPassword"
-                android:paddingHorizontal="16dp"
-                android:textColorHint="@color/color_80544247"
-                android:textSize="16sp" />
+                android:layout_marginTop="8dp">
+
+                <EditText
+                    android:id="@+id/etPasswordConfirm"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/bg_input_field"
+                    android:hint="비밀번호를 재입력하세요"
+                    android:inputType="textPassword"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="48dp"
+                    android:textColorHint="@color/color_80544247"
+                    android:textSize="16sp" />
+
+                <ImageButton
+                    android:id="@+id/btnTogglePasswordConfirm"
+                    android:layout_width="48dp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="end|center_vertical"
+                    android:src="@drawable/ic_eye_off"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    app:tint="@color/color_6b7280" />
+            </FrameLayout>
 
             <TextView
                 android:layout_width="wrap_content"

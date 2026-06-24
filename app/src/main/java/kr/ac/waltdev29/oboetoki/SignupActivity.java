@@ -24,6 +24,8 @@ public class SignupActivity extends AppCompatActivity {
     private ActivitySignupBinding binding;
     private PreferenceManager preferenceManager;
     private boolean isEmailAvailable = false;
+    private boolean isPasswordVisible = false;
+    private boolean isPasswordConfirmVisible = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +42,30 @@ public class SignupActivity extends AppCompatActivity {
                 return;
             }
             checkEmail(email);
+        });
+
+        binding.btnTogglePassword.setOnClickListener(v -> {
+            isPasswordVisible = !isPasswordVisible;
+            if (isPasswordVisible) {
+                binding.etPassword.setInputType(android.text.InputType.TYPE_CLASS_TEXT | android.text.InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
+                binding.btnTogglePassword.setImageResource(R.drawable.ic_eye);
+            } else {
+                binding.etPassword.setInputType(android.text.InputType.TYPE_CLASS_TEXT | android.text.InputType.TYPE_TEXT_VARIATION_PASSWORD);
+                binding.btnTogglePassword.setImageResource(R.drawable.ic_eye_off);
+            }
+            binding.etPassword.setSelection(binding.etPassword.getText().length());
+        });
+
+        binding.btnTogglePasswordConfirm.setOnClickListener(v -> {
+            isPasswordConfirmVisible = !isPasswordConfirmVisible;
+            if (isPasswordConfirmVisible) {
+                binding.etPasswordConfirm.setInputType(android.text.InputType.TYPE_CLASS_TEXT | android.text.InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
+                binding.btnTogglePasswordConfirm.setImageResource(R.drawable.ic_eye);
+            } else {
+                binding.etPasswordConfirm.setInputType(android.text.InputType.TYPE_CLASS_TEXT | android.text.InputType.TYPE_TEXT_VARIATION_PASSWORD);
+                binding.btnTogglePasswordConfirm.setImageResource(R.drawable.ic_eye_off);
+            }
+            binding.etPasswordConfirm.setSelection(binding.etPasswordConfirm.getText().length());
         });
 
         binding.btnSignupComplete.setOnClickListener(v -> attemptSignup());

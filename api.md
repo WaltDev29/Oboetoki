@@ -5,7 +5,7 @@ Swagger UI: `http://localhost:8000/docs`
 
 > **[주요 변경 사항]**
 > - **인증 (Auth)**: `username` 필드가 삭제되고 **`email` 기반 로그인/가입**으로 전면 개편되었습니다. `name`, `phone`이 필수값으로 변경되었습니다.
-> - **단어장 (Words)**: `memorization_level` 필드가 삭제되고, 일본어 요미가나/발음을 저장하는 **`reading` 필드가 추가**되었습니다. 정렬 파라미터(`sort_by`)가 제거되었습니다.
+> - **단어장 (Words)**: `memorization_level` 필드가 삭제되고, 일본어 요미가나/발음을 저장하는 **`reading` 필드가 추가**되었습니다. 정렬 파라미터(`sort_by`)가 제거되었습니다. 단어 추가 시 **중복 체크 로직**이 추가되었습니다.
 > - **OCR (Vision)**: Tesseract 엔진이 제거되고, **OpenAI Vision LLM을 통해 이미지 파싱, 원본 언어 식별(`source_language`), 발음 추출(`reading`)**이 한 번에 자동 처리되도록 개편되었습니다.
 
 ---
@@ -63,6 +63,18 @@ Swagger UI: `http://localhost:8000/docs`
   }
   ```
 
+### 1.4 내 정보 조회
+- **URL**: `/auth/me`
+- **Method**: `GET`
+- **Description**: 현재 로그인한 사용자의 이름과 이메일 정보를 반환합니다. (Authorization 헤더 필요)
+- **Response** (200 OK):
+  ```json
+  {
+    "name": "홍길동",
+    "email": "user@example.com"
+  }
+  ```
+
 ---
 
 *이하 모든 `/main` 및 `/words` API는 Request Header에 `Authorization: Bearer <access_token>`이 필요합니다.*
@@ -92,7 +104,7 @@ Swagger UI: `http://localhost:8000/docs`
 - **Method**: `GET`
 - **Query Parameters**:
   - `is_memorized` (boolean, 선택): 외운 단어(true)/못 외운 단어(false) 필터링
-  - **(삭제됨)**: `sort_by` 파라미터 삭제 (기본 최신순 정렬)
+  - `sort_order` (string, 선택): 등록일자 정렬 방식 (`asc` 또는 `desc`, 기본값 `desc`)
 - **Response** (200 OK):
   ```json
   [
@@ -112,7 +124,7 @@ Swagger UI: `http://localhost:8000/docs`
 ### 3.2 단일 단어 등록 (**추가됨: reading 필드**)
 - **URL**: `/words/`
 - **Method**: `POST`
-- **Description**: 새로운 단어를 하나 등록합니다.
+- **Description**: 새로운 단어를 하나 등록합니다. 이미 존재하는 단어일 경우 409 에러를 반환합니다.
 - **Request Body** (`application/json`):
   ```json
   {
@@ -123,11 +135,12 @@ Swagger UI: `http://localhost:8000/docs`
   }
   ```
 - **Response** (200 OK): 등록된 단어 데이터 반환
+- **Error Response** (409 Conflict): `{"detail": "Word already exists in your vocabulary"}`
 
 ### 3.3 단어 일괄 등록 (Batch)
 - **URL**: `/words/batch`
 - **Method**: `POST`
-- **Description**: 여러 단어를 한 번에 등록합니다. (OCR 결과를 앱에서 승인 후 일괄 저장할 때 사용)
+- **Description**: 여러 단어를 한 번에 등록합니다. (OCR 결과를 앱에서 승인 후 일괄 저장할 때 사용) 이미 존재하는 단어는 무시됩니다.
 - **Request Body** (JSON Array):
   ```json
   [
@@ -139,7 +152,24 @@ Swagger UI: `http://localhost:8000/docs`
     }
   ]
   ```
-- **Response** (200 OK): 등록된 단어 배열 반환
+- **Response** (200 OK):
+  ```json
+  {
+    "added_words": [
+      {
+        "id": 2,
+        "user_id": 1,
+        "original_word": "暮らす",
+        "reading": "くらす",
+        "translated_word": "살다, 생활하다",
+        "source_language": "ja",
+        "is_memorized": false,
+        "created_at": "2026-06-23T12:05:00Z"
+      }
+    ],
+    "ignored_words": ["이미_존재하는_단어"]
+  }
+  ```
 
 ### 3.4 단어 상세 조회
 - **URL**: `/words/{word_id}`
@@ -150,7 +180,7 @@ Swagger UI: `http://localhost:8000/docs`
 ### 3.5 단어 수정 (**삭제됨: memorization_level**)
 - **URL**: `/words/{word_id}`
 - **Method**: `PUT`
-- **Description**: 기존 단어 정보를 수정합니다.
+- **Description**: 기존 단어 정보를 수정합니다. 원어(`original_word`) 수정 시 이미 존재하는 단어일 경우 409 에러를 반환합니다.
 - **Request Body** (`application/json`, 수정할 필드만 포함 가능):
   ```json
   {
@@ -161,8 +191,15 @@ Swagger UI: `http://localhost:8000/docs`
   }
   ```
 - **Response** (200 OK): 수정된 단어 데이터 반환
+- **Error Response** (409 Conflict): `{"detail": "Word already exists in your vocabulary"}`
 
-### 3.6 OCR 단어 파싱 (DB 저장 X) (**변경: OpenAI Vision 적용 및 추출 필드 강화**)
+### 3.6 단어 삭제
+- **URL**: `/words/{word_id}`
+- **Method**: `DELETE`
+- **Description**: 단어 ID를 통해 특정 단어를 단어장에서 삭제합니다.
+- **Response** (204 No Content): 반환 데이터 없음
+
+### 3.7 OCR 단어 파싱 (DB 저장 X) (**변경: OpenAI Vision 적용 및 추출 필드 강화**)
 - **URL**: `/words/ocr`
 - **Method**: `POST`
 - **Description**: 사진(이미지)을 업로드받아 LLM(OpenAI Vision) 모델을 통해 원어, 요미가나/발음, 한국어 뜻, 원본 언어 코드를 한 번에 추출합니다. DB에는 저장되지 않습니다.

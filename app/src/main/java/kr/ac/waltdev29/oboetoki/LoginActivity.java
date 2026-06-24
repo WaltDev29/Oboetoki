@@ -20,6 +20,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private ActivityLoginBinding binding;
     private PreferenceManager preferenceManager;
+    private boolean isPasswordVisible = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +45,18 @@ public class LoginActivity extends AppCompatActivity {
         binding.btnSignup.setOnClickListener(v -> {
             Intent intent = new Intent(this, SignupActivity.class);
             startActivity(intent);
+        });
+
+        binding.btnTogglePassword.setOnClickListener(v -> {
+            isPasswordVisible = !isPasswordVisible;
+            if (isPasswordVisible) {
+                binding.etPassword.setInputType(android.text.InputType.TYPE_CLASS_TEXT | android.text.InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
+                binding.btnTogglePassword.setImageResource(R.drawable.ic_eye);
+            } else {
+                binding.etPassword.setInputType(android.text.InputType.TYPE_CLASS_TEXT | android.text.InputType.TYPE_TEXT_VARIATION_PASSWORD);
+                binding.btnTogglePassword.setImageResource(R.drawable.ic_eye_off);
+            }
+            binding.etPassword.setSelection(binding.etPassword.getText().length());
         });
     }
 

@@ -67,17 +67,32 @@
             android:textStyle="bold"
             android:layout_marginTop="24dp" />
 
-        <EditText
-            android:id="@+id/etPassword"
+        <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:layout_marginTop="8dp"
-            android:background="@drawable/bg_input_field"
-            android:paddingHorizontal="16dp"
-            android:hint="@string/str_13"
-            android:textColorHint="@color/color_80544247"
-            android:textSize="16sp"
-            android:inputType="textPassword" />
+            android:layout_marginTop="8dp">
+
+            <EditText
+                android:id="@+id/etPassword"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/bg_input_field"
+                android:paddingStart="16dp"
+                android:paddingEnd="48dp"
+                android:hint="@string/str_13"
+                android:textColorHint="@color/color_80544247"
+                android:textSize="16sp"
+                android:inputType="textPassword" />
+
+            <ImageButton
+                android:id="@+id/btnTogglePassword"
+                android:layout_width="48dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="end|center_vertical"
+                android:src="@drawable/ic_eye_off"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                app:tint="@color/color_6b7280" />
+        </FrameLayout>
 
         <CheckBox
             android:id="@+id/cbAutoLogin"
