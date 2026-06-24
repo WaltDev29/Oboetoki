@@ -27,6 +27,10 @@ public class SplashActivity extends AppCompatActivity {
     }
 
     private void checkLoginStatus() {
+        if (!preferenceManager.isAutoLogin()) {
+            preferenceManager.clearToken();
+        }
+        
         String token = preferenceManager.getToken();
         Intent intent;
         

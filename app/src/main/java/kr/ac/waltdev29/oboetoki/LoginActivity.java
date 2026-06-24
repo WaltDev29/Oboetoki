@@ -54,11 +54,8 @@ public class LoginActivity extends AppCompatActivity {
                     public void onResponse(@NonNull Call<TokenResponse> call, @NonNull Response<TokenResponse> response) {
                         if (response.isSuccessful() && response.body() != null) {
                             String token = response.body().accessToken;
-                            if (binding.cbAutoLogin.isChecked()) {
-                                preferenceManager.saveToken(token);
-                            } else {
-                                preferenceManager.saveToken(token);
-                            }
+                            preferenceManager.saveToken(token);
+                            preferenceManager.setAutoLogin(binding.cbAutoLogin.isChecked());
 
                             Toast.makeText(LoginActivity.this, "로그인 성공", Toast.LENGTH_SHORT).show();
 

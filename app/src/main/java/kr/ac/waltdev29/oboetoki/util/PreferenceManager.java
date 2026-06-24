@@ -42,6 +42,19 @@ public class PreferenceManager {
         return null;
     }
 
+    public void setAutoLogin(boolean isAutoLogin) {
+        if (sharedPreferences != null) {
+            sharedPreferences.edit().putBoolean("auto_login", isAutoLogin).apply();
+        }
+    }
+
+    public boolean isAutoLogin() {
+        if (sharedPreferences != null) {
+            return sharedPreferences.getBoolean("auto_login", false);
+        }
+        return false;
+    }
+
     public void clearToken() {
         if (sharedPreferences != null) {
             sharedPreferences.edit().remove("auth_token").apply();
