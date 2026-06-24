@@ -9,7 +9,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
+import androidx.fragment.app.DialogFragment;
 import com.google.gson.Gson;
 
 import java.util.HashMap;
@@ -25,7 +25,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import kr.ac.waltdev29.oboetoki.util.ConfirmDialog;
 
-public class VocabularyDetailDialog extends BottomSheetDialogFragment {
+public class VocabularyDetailDialog extends DialogFragment {
 
     public interface OnWordChangedListener {
         void onWordChanged();
@@ -62,6 +62,18 @@ public class VocabularyDetailDialog extends BottomSheetDialogFragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         binding = DialogVocabularyDetailBinding.inflate(inflater, container, false);
         return binding.getRoot();
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        if (getDialog() != null && getDialog().getWindow() != null) {
+            getDialog().getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+            getDialog().getWindow().setLayout(
+                    (int) (getResources().getDisplayMetrics().widthPixels * 0.9),
+                    android.view.ViewGroup.LayoutParams.WRAP_CONTENT
+            );
+        }
     }
 
     @Override
