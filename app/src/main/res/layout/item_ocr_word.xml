@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:layout_marginBottom="8dp"
+    android:padding="12dp"
+    android:background="@drawable/bg_bottom_sheet"
+    android:elevation="2dp"
+    android:gravity="center_vertical">
+
+    <EditText
+        android:id="@+id/etOriginalWord"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:hint="원어"
+        android:textColor="@color/color_111827"
+        android:textSize="16sp"
+        android:background="@android:color/transparent"
+        android:textStyle="bold"
+        android:maxLines="1"
+        android:inputType="text" />
+        
+    <View
+        android:layout_width="1dp"
+        android:layout_height="24dp"
+        android:layout_marginHorizontal="8dp"
+        android:background="@color/color_e5e7eb" />
+
+    <EditText
+        android:id="@+id/etReading"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:hint="발음"
+        android:textColor="@color/color_6b7280"
+        android:textSize="14sp"
+        android:background="@android:color/transparent"
+        android:maxLines="1"
+        android:inputType="text" />
+        
+    <View
+        android:layout_width="1dp"
+        android:layout_height="24dp"
+        android:layout_marginHorizontal="8dp"
+        android:background="@color/color_e5e7eb" />
+
+    <EditText
+        android:id="@+id/etMeaning"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:hint="뜻"
+        android:textColor="@color/color_4b5563"
+        android:textSize="15sp"
+        android:background="@android:color/transparent"
+        android:maxLines="1"
+        android:inputType="text" />
+
+    <ImageButton
+        android:id="@+id/btnDelete"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_marginStart="8dp"
+        android:src="@android:drawable/ic_menu_delete"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:tint="@color/color_ff85b2" />
+</LinearLayout>

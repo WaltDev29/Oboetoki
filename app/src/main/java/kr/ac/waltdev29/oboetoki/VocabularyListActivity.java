@@ -27,8 +27,6 @@ public class VocabularyListActivity extends BaseNavigationActivity {
 
     private ActivityVocabularyListBinding binding;
     private VocabularyAdapter adapter;
-    private boolean isOcrMode = false;
-    private List<Word> parsedWords = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,29 +36,15 @@ public class VocabularyListActivity extends BaseNavigationActivity {
 
         setupRecyclerView();
 
-        String ocrJson = getIntent().getStringExtra("ocr_words");
-        if (ocrJson != null && !ocrJson.isEmpty()) {
-            isOcrMode = true;
-            Type type = new TypeToken<List<Word>>() {}.getType();
-            parsedWords = new Gson().fromJson(ocrJson, type);
-            adapter.updateData(parsedWords);
-
-            binding.includedBottomNav.bottomNavView.setVisibility(View.GONE);
-            binding.bottomLayout.setVisibility(View.VISIBLE);
-
-            binding.btnSaveBatch.setOnClickListener(v -> saveWordsBatch());
-            binding.btnCancel.setOnClickListener(v -> finish());
-        } else {
-            setupBottomNavigation(binding.includedBottomNav.bottomNavView, R.id.nav_vocabulary);
-            fetchWords(null, "desc");
-        }
+        setupBottomNavigation(binding.includedBottomNav.bottomNavView, R.id.nav_vocabulary);
+        fetchWords(null, "desc");
     }
 
     private void setupRecyclerView() {
         adapter = new VocabularyAdapter(new ArrayList<>(), word -> {
             VocabularyDetailDialog dialog = VocabularyDetailDialog.newInstance(word);
             dialog.setOnWordChangedListener(() -> {
-                fetchWords(null, "desc"); // 기본 정렬/필터로 리프레시 (원하면 현재 필터 유지 가능하지만 지금은 간단히 기본값 사용)
+                fetchWords(null, "desc");
             });
             dialog.show(getSupportFragmentManager(), "VocabularyDetailDialog");
         });
@@ -70,10 +54,8 @@ public class VocabularyListActivity extends BaseNavigationActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        if (!isOcrMode) {
-            binding.includedBottomNav.bottomNavView.setSelectedItemId(R.id.nav_vocabulary);
-            fetchWords(null, "desc");
-        }
+        binding.includedBottomNav.bottomNavView.setSelectedItemId(R.id.nav_vocabulary);
+        fetchWords(null, "desc");
         
         binding.btnFilter.setOnClickListener(v -> {
             VocabularyFilterBottomSheet filterSheet = new VocabularyFilterBottomSheet();
@@ -101,47 +83,6 @@ public class VocabularyListActivity extends BaseNavigationActivity {
                     public void onFailure(@NonNull Call<List<Word>> call, @NonNull Throwable t) {
                         t.printStackTrace();
                         NotificationDialog.newInstance("오류", "단어 목록을 불러오는데 실패했습니다:\n" + t.getMessage()).show(getSupportFragmentManager(), "FetchWordsFail");
-                    }
-                });
-    }
-
-    private void saveWordsBatch() {
-        if (parsedWords.isEmpty()) return;
-
-        RetrofitClient.getWordService(basePreferenceManager)
-                .addWordsBatch(parsedWords)
-                .enqueue(new Callback<BatchWordResponse>() {
-                    @Override
-                    public void onResponse(@NonNull Call<BatchWordResponse> call, @NonNull Response<BatchWordResponse> response) {
-                        if (response.isSuccessful() && response.body() != null) {
-                            BatchWordResponse batchResponse = response.body();
-                            int addedCount = batchResponse.addedWords != null ? batchResponse.addedWords.size() : 0;
-                            String msg = "단어 추가 완료 (" + addedCount + "개)";
-                            
-                            if (batchResponse.ignoredWords != null && !batchResponse.ignoredWords.isEmpty()) {
-                                msg += "\n중복 제외: " + batchResponse.ignoredWords.size() + "개";
-                            }
-                            
-                            NotificationDialog successDialog = NotificationDialog.newInstance("알림", msg);
-                            successDialog.setOnDismissAction(() -> {
-                                isOcrMode = false;
-                                binding.bottomLayout.setVisibility(View.GONE);
-                                binding.includedBottomNav.bottomNavView.setVisibility(View.VISIBLE);
-                                setupBottomNavigation(binding.includedBottomNav.bottomNavView, R.id.nav_vocabulary);
-                                fetchWords(null, "desc");
-                            });
-                            successDialog.show(getSupportFragmentManager(), "BatchSaveSuccess");
-                        } else if (response.code() == 409) {
-                            NotificationDialog.newInstance("알림", "이미 등록된 단어가 존재합니다.").show(getSupportFragmentManager(), "BatchSaveConflict");
-                        } else {
-                            NotificationDialog.newInstance("오류", "저장 실패 (" + response.code() + ")").show(getSupportFragmentManager(), "BatchSaveFail");
-                        }
-                    }
-
-                    @Override
-                    public void onFailure(@NonNull Call<BatchWordResponse> call, @NonNull Throwable t) {
-                        t.printStackTrace();
-                        NotificationDialog.newInstance("오류", "저장 실패: " + t.getMessage()).show(getSupportFragmentManager(), "BatchSaveFail");
                     }
                 });
     }

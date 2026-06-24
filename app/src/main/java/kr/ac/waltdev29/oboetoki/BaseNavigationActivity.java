@@ -179,10 +179,8 @@ public abstract class BaseNavigationActivity extends AppCompatActivity {
                     public void onResponse(@NonNull Call<OcrResult> call, @NonNull Response<OcrResult> response) {
                         hideProgress();
                         if (response.isSuccessful() && response.body() != null) {
-                            String jsonWords = new Gson().toJson(response.body().parsedWords);
-                            Intent intent = new Intent(BaseNavigationActivity.this, VocabularyListActivity.class);
-                            intent.putExtra("ocr_words", jsonWords);
-                            startActivity(intent);
+                            OcrResultDialog dialog = OcrResultDialog.newInstance(response.body().parsedWords);
+                            dialog.show(getSupportFragmentManager(), "OcrResultDialog");
                         } else {
                             try {
                                 String errorMsg = response.errorBody() != null ? response.errorBody().string() : "알 수 없는 에러";
