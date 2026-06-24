@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/color_f8f9ff">
+    android:background="@color/color_ffffff">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
@@ -41,8 +41,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="8dp">
+                android:layout_marginTop="8dp"
+                android:orientation="horizontal">
 
                 <EditText
                     android:id="@+id/etEmail"
@@ -50,9 +50,9 @@
                     android:layout_height="50dp"
                     android:layout_weight="1"
                     android:background="@drawable/bg_input_field"
-                    android:paddingHorizontal="16dp"
                     android:hint="이메일을 입력하세요"
                     android:inputType="textEmailAddress"
+                    android:paddingHorizontal="16dp"
                     android:textColorHint="@color/color_80544247"
                     android:textSize="16sp" />
 
@@ -61,18 +61,18 @@
                     android:layout_width="wrap_content"
                     android:layout_height="50dp"
                     android:layout_marginStart="8dp"
-                    android:text="중복확인"
                     android:background="@drawable/bg_button_primary"
-                    app:backgroundTint="@null"
-                    android:textColor="@color/color_ffffff" />
+                    android:text="중복확인"
+                    android:textColor="@color/color_ffffff"
+                    app:backgroundTint="@null" />
             </LinearLayout>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
                 android:text="@string/str_23"
-                android:textStyle="bold"
-                android:layout_marginTop="16dp" />
+                android:textStyle="bold" />
 
             <EditText
                 android:id="@+id/etPassword"
@@ -80,18 +80,18 @@
                 android:layout_height="50dp"
                 android:layout_marginTop="8dp"
                 android:background="@drawable/bg_input_field"
-                android:paddingHorizontal="16dp"
                 android:hint="@string/str_13"
+                android:inputType="textPassword"
+                android:paddingHorizontal="16dp"
                 android:textColorHint="@color/color_80544247"
-                android:textSize="16sp"
-                android:inputType="textPassword" />
+                android:textSize="16sp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
                 android:text="@string/str_24"
-                android:textStyle="bold"
-                android:layout_marginTop="16dp" />
+                android:textStyle="bold" />
 
             <EditText
                 android:id="@+id/etPasswordConfirm"
@@ -99,18 +99,18 @@
                 android:layout_height="50dp"
                 android:layout_marginTop="8dp"
                 android:background="@drawable/bg_input_field"
-                android:paddingHorizontal="16dp"
                 android:hint="비밀번호를 재입력하세요"
+                android:inputType="textPassword"
+                android:paddingHorizontal="16dp"
                 android:textColorHint="@color/color_80544247"
-                android:textSize="16sp"
-                android:inputType="textPassword" />
+                android:textSize="16sp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
                 android:text="@string/str_25"
-                android:textStyle="bold"
-                android:layout_marginTop="16dp" />
+                android:textStyle="bold" />
 
             <EditText
                 android:id="@+id/etName"
@@ -118,18 +118,18 @@
                 android:layout_height="50dp"
                 android:layout_marginTop="8dp"
                 android:background="@drawable/bg_input_field"
-                android:paddingHorizontal="16dp"
                 android:hint="@string/str_33"
+                android:inputType="text"
+                android:paddingHorizontal="16dp"
                 android:textColorHint="@color/color_80544247"
-                android:textSize="16sp"
-                android:inputType="text" />
+                android:textSize="16sp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
                 android:text="@string/str_26"
-                android:textStyle="bold"
-                android:layout_marginTop="16dp" />
+                android:textStyle="bold" />
 
             <EditText
                 android:id="@+id/etPhone"
@@ -137,11 +137,11 @@
                 android:layout_height="50dp"
                 android:layout_marginTop="8dp"
                 android:background="@drawable/bg_input_field"
-                android:paddingHorizontal="16dp"
                 android:hint="@string/str_010_1234_5678"
+                android:inputType="phone"
+                android:paddingHorizontal="16dp"
                 android:textColorHint="@color/color_80544247"
-                android:textSize="16sp"
-                android:inputType="phone" />
+                android:textSize="16sp" />
 
         </LinearLayout>
     </ScrollView>

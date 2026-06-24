@@ -97,7 +97,15 @@ public abstract class BaseNavigationActivity extends AppCompatActivity {
     }
 
     protected void setupBottomNavigation(BottomNavigationView bottomNavigationView, int currentItemId) {
-        bottomNavigationView.setSelectedItemId(currentItemId);
+        if (currentItemId != -1) {
+            bottomNavigationView.setSelectedItemId(currentItemId);
+        } else {
+            // Uncheck all items for MyPage
+            int size = bottomNavigationView.getMenu().size();
+            for (int i = 0; i < size; i++) {
+                bottomNavigationView.getMenu().getItem(i).setCheckable(false);
+            }
+        }
 
         bottomNavigationView.setOnItemSelectedListener(item -> {
             int itemId = item.getItemId();
@@ -122,6 +130,25 @@ public abstract class BaseNavigationActivity extends AppCompatActivity {
             }
             return false;
         });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        setupHeader();
+    }
+
+    private void setupHeader() {
+        android.view.View btnMyPage = findViewById(R.id.btnMyPage);
+        if (btnMyPage != null) {
+            btnMyPage.setOnClickListener(v -> {
+                if (!(this instanceof MyPageActivity)) {
+                    Intent intent = new Intent(this, MyPageActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                    startActivity(intent);
+                }
+            });
+        }
     }
 
     private void showImageSelectionDialog() {

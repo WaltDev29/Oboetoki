@@ -23,4 +23,15 @@
             android:textColor="@color/brand_pink_light"
             android:layout_marginStart="8dp" />
     </LinearLayout>
+
+    <ImageButton
+        android:id="@+id/btnMyPage"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_gravity="end|center_vertical"
+        android:layout_marginEnd="8dp"
+        android:src="@drawable/ic_my_page"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:tint="@color/color_6b7280" />
+
 </androidx.appcompat.widget.Toolbar>

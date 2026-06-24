@@ -26,4 +26,7 @@ public interface AuthService {
             @Field("username") String username,
             @Field("password") String password
     );
+
+    @GET("auth/me")
+    Call<User> getMe();
 }
