@@ -65,5 +65,5 @@
         android:layout_marginStart="8dp"
         android:src="@android:drawable/ic_menu_delete"
         android:background="?attr/selectableItemBackgroundBorderless"
-        android:tint="@color/color_ff85b2" />
+        android:tint="@color/color_6b7280" />
 </LinearLayout>

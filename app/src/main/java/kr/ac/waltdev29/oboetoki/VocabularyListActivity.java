@@ -64,6 +64,18 @@ public class VocabularyListActivity extends BaseNavigationActivity {
             });
             filterSheet.show(getSupportFragmentManager(), "VocabularyFilter");
         });
+
+        binding.tvHeaderOriginal.setOnClickListener(v -> {
+            adapter.setOriginalMasked(!adapter.isOriginalMasked());
+        });
+
+        binding.tvHeaderReading.setOnClickListener(v -> {
+            adapter.setReadingMasked(!adapter.isReadingMasked());
+        });
+
+        binding.tvHeaderTranslated.setOnClickListener(v -> {
+            adapter.setTranslatedMasked(!adapter.isTranslatedMasked());
+        });
     }
 
     private void fetchWords(Boolean isMemorized, String sortOrder) {

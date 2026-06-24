@@ -22,8 +22,10 @@
             android:id="@+id/btnFilter"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:src="@drawable/ic_book"
-            android:background="?attr/selectableItemBackgroundBorderless"
+            android:src="@drawable/ic_filter"
+            android:background="@drawable/bg_filter_btn"
+            android:scaleType="center"
+            app:tint="@color/brand_pink_dark"
             android:contentDescription="필터" />
 
         <EditText
@@ -49,31 +51,46 @@
         android:background="#FCE7F3">
 
         <TextView
+            android:id="@+id/tvHeaderOriginal"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:layout_marginHorizontal="2dp"
             android:text="@string/str_36"
             android:textStyle="bold"
             android:textColor="@color/color_374151"
-            android:textSize="14sp" />
+            android:textSize="14sp"
+            android:clickable="true"
+            android:focusable="true"
+            android:background="?attr/selectableItemBackground" />
 
         <TextView
+            android:id="@+id/tvHeaderReading"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:layout_marginHorizontal="2dp"
             android:text="@string/str_reading"
             android:textStyle="bold"
             android:textColor="@color/color_374151"
-            android:textSize="14sp" />
+            android:textSize="14sp"
+            android:clickable="true"
+            android:focusable="true"
+            android:background="?attr/selectableItemBackground" />
 
         <TextView
+            android:id="@+id/tvHeaderTranslated"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:layout_marginHorizontal="2dp"
             android:text="@string/str_37"
             android:textStyle="bold"
             android:textColor="@color/color_374151"
-            android:textSize="14sp" />
+            android:textSize="14sp"
+            android:clickable="true"
+            android:focusable="true"
+            android:background="?attr/selectableItemBackground" />
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView

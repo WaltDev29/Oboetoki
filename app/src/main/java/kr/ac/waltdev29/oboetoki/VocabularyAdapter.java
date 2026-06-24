@@ -17,10 +17,39 @@ public class VocabularyAdapter extends RecyclerView.Adapter<VocabularyAdapter.Vi
     private List<Word> words;
     private final OnItemClickListener onItemClick;
 
+    private boolean isOriginalMasked = false;
+    private boolean isReadingMasked = false;
+    private boolean isTranslatedMasked = false;
+
+    private java.util.Set<Integer> peekedOriginals = new java.util.HashSet<>();
+    private java.util.Set<Integer> peekedReadings = new java.util.HashSet<>();
+    private java.util.Set<Integer> peekedTranslations = new java.util.HashSet<>();
+
     public VocabularyAdapter(List<Word> words, OnItemClickListener onItemClick) {
         this.words = words;
         this.onItemClick = onItemClick;
     }
+
+    public void setOriginalMasked(boolean masked) {
+        this.isOriginalMasked = masked;
+        peekedOriginals.clear();
+        notifyDataSetChanged();
+    }
+    public boolean isOriginalMasked() { return isOriginalMasked; }
+
+    public void setReadingMasked(boolean masked) {
+        this.isReadingMasked = masked;
+        peekedReadings.clear();
+        notifyDataSetChanged();
+    }
+    public boolean isReadingMasked() { return isReadingMasked; }
+
+    public void setTranslatedMasked(boolean masked) {
+        this.isTranslatedMasked = masked;
+        peekedTranslations.clear();
+        notifyDataSetChanged();
+    }
+    public boolean isTranslatedMasked() { return isTranslatedMasked; }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         public final ItemVocabularyBinding binding;
@@ -39,6 +68,16 @@ public class VocabularyAdapter extends RecyclerView.Adapter<VocabularyAdapter.Vi
         return new ViewHolder(binding);
     }
 
+    private void applyMasking(android.widget.TextView tv, boolean isMasked, int defaultColorId) {
+        if (isMasked) {
+            tv.setTextColor(android.graphics.Color.TRANSPARENT);
+            tv.setBackgroundResource(R.drawable.bg_masked_text);
+        } else {
+            tv.setTextColor(androidx.core.content.ContextCompat.getColor(tv.getContext(), defaultColorId));
+            tv.setBackground(null);
+        }
+    }
+
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Word word = words.get(position);
@@ -53,7 +92,43 @@ public class VocabularyAdapter extends RecyclerView.Adapter<VocabularyAdapter.Vi
         
         holder.binding.tvTranslatedWord.setText(word.translatedWord);
         
+        boolean originalMasked = isOriginalMasked && !peekedOriginals.contains(word.id);
+        applyMasking(holder.binding.tvOriginalWord, originalMasked, R.color.color_111827);
+        
+        boolean readingMasked = isReadingMasked && !peekedReadings.contains(word.id);
+        applyMasking(holder.binding.tvReading, readingMasked, R.color.color_4b5563);
+        
+        boolean translatedMasked = isTranslatedMasked && !peekedTranslations.contains(word.id);
+        applyMasking(holder.binding.tvTranslatedWord, translatedMasked, R.color.color_4b5563);
+        
         holder.binding.getRoot().setOnClickListener(v -> onItemClick.onItemClick(word));
+
+        holder.binding.tvOriginalWord.setOnClickListener(v -> {
+            if (originalMasked) {
+                peekedOriginals.add(word.id);
+                notifyItemChanged(holder.getAdapterPosition());
+            } else {
+                onItemClick.onItemClick(word);
+            }
+        });
+
+        holder.binding.tvReading.setOnClickListener(v -> {
+            if (readingMasked) {
+                peekedReadings.add(word.id);
+                notifyItemChanged(holder.getAdapterPosition());
+            } else {
+                onItemClick.onItemClick(word);
+            }
+        });
+
+        holder.binding.tvTranslatedWord.setOnClickListener(v -> {
+            if (translatedMasked) {
+                peekedTranslations.add(word.id);
+                notifyItemChanged(holder.getAdapterPosition());
+            } else {
+                onItemClick.onItemClick(word);
+            }
+        });
     }
 
     @Override
