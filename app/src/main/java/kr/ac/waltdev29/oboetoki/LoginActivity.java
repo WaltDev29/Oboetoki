@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import kr.ac.waltdev29.oboetoki.data.api.RetrofitClient;
 import kr.ac.waltdev29.oboetoki.data.model.TokenResponse;
 import kr.ac.waltdev29.oboetoki.databinding.ActivityLoginBinding;
+import kr.ac.waltdev29.oboetoki.util.NotificationDialog;
 import kr.ac.waltdev29.oboetoki.util.PreferenceManager;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -57,20 +58,22 @@ public class LoginActivity extends AppCompatActivity {
                             preferenceManager.saveToken(token);
                             preferenceManager.setAutoLogin(binding.cbAutoLogin.isChecked());
 
-                            Toast.makeText(LoginActivity.this, "로그인 성공", Toast.LENGTH_SHORT).show();
-
-                            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                            startActivity(intent);
-                            finish();
+                            NotificationDialog dialog = NotificationDialog.newInstance("알림", "로그인에 성공했습니다.");
+                            dialog.setOnDismissAction(() -> {
+                                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                                startActivity(intent);
+                                finish();
+                            });
+                            dialog.show(getSupportFragmentManager(), "LoginSuccess");
                         } else {
-                            Toast.makeText(LoginActivity.this, "로그인 실패", Toast.LENGTH_SHORT).show();
+                            NotificationDialog.newInstance("알림", "로그인에 실패했습니다.").show(getSupportFragmentManager(), "LoginFail");
                         }
                     }
 
                     @Override
                     public void onFailure(@NonNull Call<TokenResponse> call, @NonNull Throwable t) {
                         t.printStackTrace();
-                        Toast.makeText(LoginActivity.this, "로그인 실패: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                        NotificationDialog.newInstance("오류", "네트워크 오류가 발생했습니다.\n" + t.getMessage()).show(getSupportFragmentManager(), "LoginFail");
                     }
                 });
     }

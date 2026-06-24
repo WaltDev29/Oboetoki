@@ -12,6 +12,8 @@ import kr.ac.waltdev29.oboetoki.data.api.RetrofitClient;
 import kr.ac.waltdev29.oboetoki.data.model.DuplicateCheckResponse;
 import kr.ac.waltdev29.oboetoki.data.model.User;
 import kr.ac.waltdev29.oboetoki.databinding.ActivitySignupBinding;
+import kr.ac.waltdev29.oboetoki.util.ConfirmDialog;
+import kr.ac.waltdev29.oboetoki.util.NotificationDialog;
 import kr.ac.waltdev29.oboetoki.util.PreferenceManager;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -40,7 +42,7 @@ public class SignupActivity extends AppCompatActivity {
             checkEmail(email);
         });
 
-        binding.btnSignupComplete.setOnClickListener(v -> performSignup());
+        binding.btnSignupComplete.setOnClickListener(v -> attemptSignup());
     }
 
     private void checkEmail(String email) {
@@ -52,24 +54,24 @@ public class SignupActivity extends AppCompatActivity {
                         if (response.isSuccessful() && response.body() != null) {
                             isEmailAvailable = response.body().isAvailable;
                             if (isEmailAvailable) {
-                                Toast.makeText(SignupActivity.this, "사용 가능한 이메일입니다.", Toast.LENGTH_SHORT).show();
+                                NotificationDialog.newInstance("알림", "사용 가능한 이메일입니다.").show(getSupportFragmentManager(), "EmailCheck");
                             } else {
-                                Toast.makeText(SignupActivity.this, "이미 사용 중인 이메일입니다.", Toast.LENGTH_SHORT).show();
+                                NotificationDialog.newInstance("알림", "이미 사용 중인 이메일입니다.").show(getSupportFragmentManager(), "EmailCheck");
                             }
                         } else {
-                            Toast.makeText(SignupActivity.this, "중복 확인 실패", Toast.LENGTH_SHORT).show();
+                            NotificationDialog.newInstance("오류", "중복 확인에 실패했습니다.").show(getSupportFragmentManager(), "EmailCheck");
                         }
                     }
 
                     @Override
                     public void onFailure(@NonNull Call<DuplicateCheckResponse> call, @NonNull Throwable t) {
                         t.printStackTrace();
-                        Toast.makeText(SignupActivity.this, "중복 확인 실패: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                        NotificationDialog.newInstance("오류", "중복 확인 실패: " + t.getMessage()).show(getSupportFragmentManager(), "EmailCheck");
                     }
                 });
     }
 
-    private void performSignup() {
+    private void attemptSignup() {
         if (!isEmailAvailable) {
             Toast.makeText(this, "이메일 중복 확인을 해주세요.", Toast.LENGTH_SHORT).show();
             return;
@@ -91,6 +93,12 @@ public class SignupActivity extends AppCompatActivity {
             return;
         }
 
+        ConfirmDialog confirmDialog = ConfirmDialog.newInstance("회원가입", "입력하신 정보로 회원가입을 진행하시겠습니까?");
+        confirmDialog.setOnConfirmListener(() -> executeSignup(email, password, name, phone));
+        confirmDialog.show(getSupportFragmentManager(), "SignupConfirm");
+    }
+
+    private void executeSignup(String email, String password, String name, String phone) {
         HashMap<String, String> request = new HashMap<>();
         request.put("email", email);
         request.put("password", password);
@@ -103,17 +111,18 @@ public class SignupActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(@NonNull Call<User> call, @NonNull Response<User> response) {
                         if (response.isSuccessful() && response.body() != null) {
-                            Toast.makeText(SignupActivity.this, "회원가입이 완료되었습니다.", Toast.LENGTH_SHORT).show();
-                            finish();
+                            NotificationDialog successDialog = NotificationDialog.newInstance("알림", "회원가입이 완료되었습니다.");
+                            successDialog.setOnDismissAction(() -> finish());
+                            successDialog.show(getSupportFragmentManager(), "SignupSuccess");
                         } else {
-                            Toast.makeText(SignupActivity.this, "회원가입 실패", Toast.LENGTH_SHORT).show();
+                            NotificationDialog.newInstance("오류", "회원가입에 실패했습니다.").show(getSupportFragmentManager(), "SignupFail");
                         }
                     }
 
                     @Override
                     public void onFailure(@NonNull Call<User> call, @NonNull Throwable t) {
                         t.printStackTrace();
-                        Toast.makeText(SignupActivity.this, "회원가입 실패: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                        NotificationDialog.newInstance("오류", "회원가입 실패: " + t.getMessage()).show(getSupportFragmentManager(), "SignupFail");
                     }
                 });
     }

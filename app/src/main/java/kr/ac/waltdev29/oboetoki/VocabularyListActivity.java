@@ -18,6 +18,7 @@ import kr.ac.waltdev29.oboetoki.data.api.RetrofitClient;
 import kr.ac.waltdev29.oboetoki.data.model.Word;
 import kr.ac.waltdev29.oboetoki.data.model.BatchWordResponse;
 import kr.ac.waltdev29.oboetoki.databinding.ActivityVocabularyListBinding;
+import kr.ac.waltdev29.oboetoki.util.NotificationDialog;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -51,13 +52,14 @@ public class VocabularyListActivity extends BaseNavigationActivity {
             binding.btnCancel.setOnClickListener(v -> finish());
         } else {
             setupBottomNavigation(binding.includedBottomNav.bottomNavView, R.id.nav_vocabulary);
-            fetchWords();
+            fetchWords(null);
         }
     }
 
     private void setupRecyclerView() {
         adapter = new VocabularyAdapter(new ArrayList<>(), word -> {
-            Toast.makeText(VocabularyListActivity.this, "단어 상세: " + word.originalWord, Toast.LENGTH_SHORT).show();
+            VocabularyDetailDialog dialog = VocabularyDetailDialog.newInstance(word);
+            dialog.show(getSupportFragmentManager(), "VocabularyDetailDialog");
         });
         binding.recyclerView.setAdapter(adapter);
     }
@@ -67,27 +69,35 @@ public class VocabularyListActivity extends BaseNavigationActivity {
         super.onResume();
         if (!isOcrMode) {
             binding.includedBottomNav.bottomNavView.setSelectedItemId(R.id.nav_vocabulary);
-            fetchWords();
+            fetchWords(null);
         }
+        
+        binding.btnFilter.setOnClickListener(v -> {
+            VocabularyFilterBottomSheet filterSheet = new VocabularyFilterBottomSheet();
+            filterSheet.setOnFilterSelectedListener(isMemorized -> {
+                fetchWords(isMemorized);
+            });
+            filterSheet.show(getSupportFragmentManager(), "VocabularyFilter");
+        });
     }
 
-    private void fetchWords() {
+    private void fetchWords(Boolean isMemorized) {
         RetrofitClient.getWordService(basePreferenceManager)
-                .getWords(null)
+                .getWords(isMemorized)
                 .enqueue(new Callback<List<Word>>() {
                     @Override
                     public void onResponse(@NonNull Call<List<Word>> call, @NonNull Response<List<Word>> response) {
                         if (response.isSuccessful() && response.body() != null) {
                             adapter.updateData(response.body());
                         } else {
-                            Toast.makeText(VocabularyListActivity.this, "단어 목록을 불러오는데 실패했습니다.", Toast.LENGTH_SHORT).show();
+                            NotificationDialog.newInstance("오류", "단어 목록을 불러오는데 실패했습니다.").show(getSupportFragmentManager(), "FetchWordsFail");
                         }
                     }
 
                     @Override
                     public void onFailure(@NonNull Call<List<Word>> call, @NonNull Throwable t) {
                         t.printStackTrace();
-                        Toast.makeText(VocabularyListActivity.this, "단어 목록을 불러오는데 실패했습니다: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                        NotificationDialog.newInstance("오류", "단어 목록을 불러오는데 실패했습니다:\n" + t.getMessage()).show(getSupportFragmentManager(), "FetchWordsFail");
                     }
                 });
     }
@@ -109,23 +119,26 @@ public class VocabularyListActivity extends BaseNavigationActivity {
                                 msg += "\n중복 제외: " + batchResponse.ignoredWords.size() + "개";
                             }
                             
-                            Toast.makeText(VocabularyListActivity.this, msg, Toast.LENGTH_LONG).show();
-                            isOcrMode = false;
-                            binding.bottomLayout.setVisibility(View.GONE);
-                            binding.includedBottomNav.bottomNavView.setVisibility(View.VISIBLE);
-                            setupBottomNavigation(binding.includedBottomNav.bottomNavView, R.id.nav_vocabulary);
-                            fetchWords();
+                            NotificationDialog successDialog = NotificationDialog.newInstance("알림", msg);
+                            successDialog.setOnDismissAction(() -> {
+                                isOcrMode = false;
+                                binding.bottomLayout.setVisibility(View.GONE);
+                                binding.includedBottomNav.bottomNavView.setVisibility(View.VISIBLE);
+                                setupBottomNavigation(binding.includedBottomNav.bottomNavView, R.id.nav_vocabulary);
+                                fetchWords(null);
+                            });
+                            successDialog.show(getSupportFragmentManager(), "BatchSaveSuccess");
                         } else if (response.code() == 409) {
-                            Toast.makeText(VocabularyListActivity.this, "이미 등록된 단어가 존재합니다.", Toast.LENGTH_SHORT).show();
+                            NotificationDialog.newInstance("알림", "이미 등록된 단어가 존재합니다.").show(getSupportFragmentManager(), "BatchSaveConflict");
                         } else {
-                            Toast.makeText(VocabularyListActivity.this, "저장 실패 (" + response.code() + ")", Toast.LENGTH_SHORT).show();
+                            NotificationDialog.newInstance("오류", "저장 실패 (" + response.code() + ")").show(getSupportFragmentManager(), "BatchSaveFail");
                         }
                     }
 
                     @Override
                     public void onFailure(@NonNull Call<BatchWordResponse> call, @NonNull Throwable t) {
                         t.printStackTrace();
-                        Toast.makeText(VocabularyListActivity.this, "저장 실패: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                        NotificationDialog.newInstance("오류", "저장 실패: " + t.getMessage()).show(getSupportFragmentManager(), "BatchSaveFail");
                     }
                 });
     }

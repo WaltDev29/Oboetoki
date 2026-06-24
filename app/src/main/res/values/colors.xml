@@ -29,4 +29,11 @@
     <color name="bg_attendance_start">#fdf2f8</color>
     <color name="bg_attendance_end">#fce7f3</color>
     <color name="color_blue_400">#60A5FA</color>
+
+    <!-- Material Colors for UI Components -->
+    <color name="primary">#ff85b2</color>
+    <color name="outline">#877177</color>
+    <color name="on_surface">#0b1c30</color>
+    <color name="on_surface_variant">#544247</color>
+    <color name="surface_container">#e5eeff</color>
 </resources>

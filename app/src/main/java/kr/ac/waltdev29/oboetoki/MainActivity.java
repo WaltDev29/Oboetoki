@@ -8,6 +8,7 @@ import androidx.annotation.NonNull;
 import kr.ac.waltdev29.oboetoki.data.api.RetrofitClient;
 import kr.ac.waltdev29.oboetoki.data.model.MainData;
 import kr.ac.waltdev29.oboetoki.databinding.ActivityMainBinding;
+import kr.ac.waltdev29.oboetoki.util.NotificationDialog;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -46,14 +47,14 @@ public class MainActivity extends BaseNavigationActivity {
                             binding.tvMemorizedWords.setText(String.valueOf(data.memorizedWords));
                             binding.tvQuote.setText("\"" + data.quoteOfTheDay + "\"");
                         } else {
-                            Toast.makeText(MainActivity.this, "데이터를 불러오는데 실패했습니다.", Toast.LENGTH_SHORT).show();
+                            NotificationDialog.newInstance("오류", "데이터를 불러오는데 실패했습니다.").show(getSupportFragmentManager(), "MainDataFail");
                         }
                     }
 
                     @Override
                     public void onFailure(@NonNull Call<MainData> call, @NonNull Throwable t) {
                         t.printStackTrace();
-                        Toast.makeText(MainActivity.this, "데이터를 불러오는데 실패했습니다: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                        NotificationDialog.newInstance("오류", "데이터를 불러오는데 실패했습니다:\n" + t.getMessage()).show(getSupportFragmentManager(), "MainDataFail");
                     }
                 });
     }

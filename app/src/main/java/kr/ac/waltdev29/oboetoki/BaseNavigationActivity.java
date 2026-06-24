@@ -27,6 +27,7 @@ import java.io.InputStream;
 
 import kr.ac.waltdev29.oboetoki.data.api.RetrofitClient;
 import kr.ac.waltdev29.oboetoki.data.model.OcrResult;
+import kr.ac.waltdev29.oboetoki.util.NotificationDialog;
 import kr.ac.waltdev29.oboetoki.util.PreferenceManager;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
@@ -185,9 +186,9 @@ public abstract class BaseNavigationActivity extends AppCompatActivity {
                         } else {
                             try {
                                 String errorMsg = response.errorBody() != null ? response.errorBody().string() : "알 수 없는 에러";
-                                Toast.makeText(BaseNavigationActivity.this, "추출 실패 (" + response.code() + "): " + errorMsg, Toast.LENGTH_LONG).show();
+                                NotificationDialog.newInstance("오류", "추출 실패 (" + response.code() + "):\n" + errorMsg).show(getSupportFragmentManager(), "ExtractFail");
                             } catch (Exception e) {
-                                Toast.makeText(BaseNavigationActivity.this, "추출 실패 (" + response.code() + ")", Toast.LENGTH_LONG).show();
+                                NotificationDialog.newInstance("오류", "추출 실패 (" + response.code() + ")").show(getSupportFragmentManager(), "ExtractFail");
                             }
                         }
                     }
@@ -196,7 +197,7 @@ public abstract class BaseNavigationActivity extends AppCompatActivity {
                     public void onFailure(@NonNull Call<OcrResult> call, @NonNull Throwable t) {
                         hideProgress();
                         t.printStackTrace();
-                        Toast.makeText(BaseNavigationActivity.this, "추출 실패: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                        NotificationDialog.newInstance("오류", "추출 실패:\n" + t.getMessage()).show(getSupportFragmentManager(), "ExtractFail");
                     }
                 });
     }
