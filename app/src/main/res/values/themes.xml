@@ -6,4 +6,8 @@
     </style>
 
     <style name="Theme.Oboetoki" parent="Base.Theme.Oboetoki" />
+
+    <style name="ThemeOverlay.Oboetoki.BottomNav" parent="">
+        <item name="colorSecondaryContainer">#FCE7F3</item>
+    </style>
 </resources>

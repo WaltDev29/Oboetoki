@@ -6,4 +6,5 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/color_ffffff"
+    android:theme="@style/ThemeOverlay.Oboetoki.BottomNav"
     app:menu="@menu/bottom_nav_menu" />
