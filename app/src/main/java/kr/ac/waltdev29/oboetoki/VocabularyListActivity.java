@@ -16,6 +16,7 @@ import java.util.List;
 
 import kr.ac.waltdev29.oboetoki.data.api.RetrofitClient;
 import kr.ac.waltdev29.oboetoki.data.model.Word;
+import kr.ac.waltdev29.oboetoki.data.model.BatchWordResponse;
 import kr.ac.waltdev29.oboetoki.databinding.ActivityVocabularyListBinding;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -96,23 +97,33 @@ public class VocabularyListActivity extends BaseNavigationActivity {
 
         RetrofitClient.getWordService(basePreferenceManager)
                 .addWordsBatch(parsedWords)
-                .enqueue(new Callback<List<Word>>() {
+                .enqueue(new Callback<BatchWordResponse>() {
                     @Override
-                    public void onResponse(@NonNull Call<List<Word>> call, @NonNull Response<List<Word>> response) {
-                        if (response.isSuccessful()) {
-                            Toast.makeText(VocabularyListActivity.this, "단어 추가 완료", Toast.LENGTH_SHORT).show();
+                    public void onResponse(@NonNull Call<BatchWordResponse> call, @NonNull Response<BatchWordResponse> response) {
+                        if (response.isSuccessful() && response.body() != null) {
+                            BatchWordResponse batchResponse = response.body();
+                            int addedCount = batchResponse.addedWords != null ? batchResponse.addedWords.size() : 0;
+                            String msg = "단어 추가 완료 (" + addedCount + "개)";
+                            
+                            if (batchResponse.ignoredWords != null && !batchResponse.ignoredWords.isEmpty()) {
+                                msg += "\n중복 제외: " + batchResponse.ignoredWords.size() + "개";
+                            }
+                            
+                            Toast.makeText(VocabularyListActivity.this, msg, Toast.LENGTH_LONG).show();
                             isOcrMode = false;
                             binding.bottomLayout.setVisibility(View.GONE);
                             binding.includedBottomNav.bottomNavView.setVisibility(View.VISIBLE);
                             setupBottomNavigation(binding.includedBottomNav.bottomNavView, R.id.nav_vocabulary);
                             fetchWords();
+                        } else if (response.code() == 409) {
+                            Toast.makeText(VocabularyListActivity.this, "이미 등록된 단어가 존재합니다.", Toast.LENGTH_SHORT).show();
                         } else {
-                            Toast.makeText(VocabularyListActivity.this, "저장 실패", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(VocabularyListActivity.this, "저장 실패 (" + response.code() + ")", Toast.LENGTH_SHORT).show();
                         }
                     }
 
                     @Override
-                    public void onFailure(@NonNull Call<List<Word>> call, @NonNull Throwable t) {
+                    public void onFailure(@NonNull Call<BatchWordResponse> call, @NonNull Throwable t) {
                         t.printStackTrace();
                         Toast.makeText(VocabularyListActivity.this, "저장 실패: " + t.getMessage(), Toast.LENGTH_SHORT).show();
                     }

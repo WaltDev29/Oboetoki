@@ -5,6 +5,7 @@ import java.util.List;
 
 import kr.ac.waltdev29.oboetoki.data.model.OcrResult;
 import kr.ac.waltdev29.oboetoki.data.model.Word;
+import kr.ac.waltdev29.oboetoki.data.model.BatchWordResponse;
 import okhttp3.MultipartBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -26,7 +27,7 @@ public interface WordService {
     Call<Word> addWord(@Body Word request);
 
     @POST("words/batch")
-    Call<List<Word>> addWordsBatch(@Body List<Word> request);
+    Call<BatchWordResponse> addWordsBatch(@Body List<Word> request);
 
     @GET("words/{word_id}")
     Call<Word> getWordDetail(@Path("word_id") int wordId);
