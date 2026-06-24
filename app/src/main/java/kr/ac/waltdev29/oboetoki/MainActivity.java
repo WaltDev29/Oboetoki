@@ -46,6 +46,13 @@ public class MainActivity extends BaseNavigationActivity {
                             binding.tvTotalWords.setText(String.valueOf(data.totalWords));
                             binding.tvMemorizedWords.setText(String.valueOf(data.memorizedWords));
                             binding.tvQuote.setText("\"" + data.quoteOfTheDay + "\"");
+
+                            int percent = 0;
+                            if (data.totalWords > 0) {
+                                percent = (int) (((float) data.memorizedWords / data.totalWords) * 100);
+                            }
+                            binding.progressWords.setProgressCompat(percent, true);
+                            binding.tvProgressPercent.setText(percent + "%");
                         } else {
                             NotificationDialog.newInstance("오류", "데이터를 불러오는데 실패했습니다.").show(getSupportFragmentManager(), "MainDataFail");
                         }
