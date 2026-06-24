@@ -25,12 +25,12 @@
             android:textStyle="bold" />
 
         <ImageButton
-            android:id="@+id/btnClose"
+            android:id="@+id/btnDelete"
             android:layout_width="32dp"
             android:layout_height="32dp"
-            android:src="@drawable/ic_close"
+            android:src="@android:drawable/ic_menu_delete"
             android:background="?attr/selectableItemBackgroundBorderless"
-            android:tint="@color/color_6b7280" />
+            android:tint="@color/color_ff85b2" />
     </LinearLayout>
 
     <View android:layout_width="match_parent" android:layout_height="1dp" android:background="@color/color_e5e7eb" />
@@ -57,11 +57,12 @@
                 android:textColor="@color/color_6b7280"
                 android:textSize="14sp"
                 android:textStyle="bold" />
-            <TextView
-                android:id="@+id/tvOriginalWord"
+            <EditText
+                android:id="@+id/etOriginalWord"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:background="@null"
                 android:text="-"
                 android:textColor="@color/color_111827"
                 android:textSize="16sp" />
@@ -82,11 +83,12 @@
                 android:textColor="@color/color_6b7280"
                 android:textSize="14sp"
                 android:textStyle="bold" />
-            <TextView
-                android:id="@+id/tvReading"
+            <EditText
+                android:id="@+id/etReading"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:background="@null"
                 android:text="-"
                 android:textColor="@color/color_111827"
                 android:textSize="16sp" />
@@ -107,11 +109,12 @@
                 android:textColor="@color/color_6b7280"
                 android:textSize="14sp"
                 android:textStyle="bold" />
-            <TextView
-                android:id="@+id/tvTranslatedWord"
+            <EditText
+                android:id="@+id/etMeaning"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:background="@null"
                 android:text="-"
                 android:textColor="@color/color_111827"
                 android:textSize="16sp" />
@@ -183,23 +186,9 @@
         android:gravity="center_vertical">
         
         <Button
-            android:id="@+id/btnDelete"
-            android:layout_width="0dp"
-            android:layout_height="56dp"
-            android:layout_weight="1"
-            android:text="삭제"
-            android:textColor="@color/color_ff85b2"
-            android:backgroundTint="@color/color_ffffff"
-            style="?attr/materialButtonOutlinedStyle"
-            app:strokeColor="@color/color_ff85b2" />
-            
-        <Space android:layout_width="16dp" android:layout_height="wrap_content" />
-        
-        <Button
             android:id="@+id/btnConfirm"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="56dp"
-            android:layout_weight="1"
             android:text="확인"
             android:textColor="@color/color_ffffff"
             android:backgroundTint="@color/color_0058be" />

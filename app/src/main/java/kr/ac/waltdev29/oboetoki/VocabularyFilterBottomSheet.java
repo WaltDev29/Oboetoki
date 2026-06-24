@@ -16,7 +16,7 @@ import kr.ac.waltdev29.oboetoki.databinding.DialogVocabularyFilterBinding;
 public class VocabularyFilterBottomSheet extends BottomSheetDialogFragment {
 
     public interface OnFilterSelectedListener {
-        void onFilterSelected(Boolean isMemorized);
+        void onFilterSelected(Boolean isMemorized, String sortOrder);
     }
 
     private DialogVocabularyFilterBinding binding;
@@ -40,23 +40,28 @@ public class VocabularyFilterBottomSheet extends BottomSheetDialogFragment {
         binding.btnClose.setOnClickListener(v -> dismiss());
 
         binding.btnFilterAll.setOnClickListener(v -> {
-            if (listener != null) listener.onFilterSelected(null);
+            if (listener != null) listener.onFilterSelected(null, "desc");
             dismiss();
         });
 
         binding.btnFilterNotMemorized.setOnClickListener(v -> {
-            if (listener != null) listener.onFilterSelected(false);
+            if (listener != null) listener.onFilterSelected(false, "desc");
             dismiss();
         });
 
         binding.btnFilterMemorized.setOnClickListener(v -> {
-            if (listener != null) listener.onFilterSelected(true);
+            if (listener != null) listener.onFilterSelected(true, "desc");
             dismiss();
         });
 
         binding.btnFilterRecent.setOnClickListener(v -> {
-            Toast.makeText(requireContext(), "최근 등록 순 필터는 준비 중입니다.", Toast.LENGTH_SHORT).show();
-            // dismiss(); // UI만 구현하라고 했으므로 닫지 않거나 토스트만 띄움
+            if (listener != null) listener.onFilterSelected(null, "desc");
+            dismiss();
+        });
+
+        binding.btnFilterOldest.setOnClickListener(v -> {
+            if (listener != null) listener.onFilterSelected(null, "asc");
+            dismiss();
         });
     }
 

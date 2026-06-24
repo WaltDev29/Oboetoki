@@ -107,7 +107,26 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="최근 등록 순"
-            android:textColor="@color/color_6b7280"
+            android:textColor="@color/color_374151"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <View android:layout_width="match_parent" android:layout_height="1dp" android:background="@color/color_f3f4f6" android:layout_marginHorizontal="24dp" />
+
+    <LinearLayout
+        android:id="@+id/btnFilterOldest"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:paddingHorizontal="24dp"
+        android:background="?attr/selectableItemBackground">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="과거 등록 순"
+            android:textColor="@color/color_374151"
             android:textSize="16sp"
             android:textStyle="bold" />
     </LinearLayout>

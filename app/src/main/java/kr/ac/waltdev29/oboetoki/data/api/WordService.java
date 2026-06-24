@@ -20,7 +20,8 @@ import retrofit2.http.Query;
 public interface WordService {
     @GET("words/")
     Call<List<Word>> getWords(
-            @Query("is_memorized") Boolean isMemorized
+            @Query("is_memorized") Boolean isMemorized,
+            @Query("sort_order") String sortOrder
     );
 
     @POST("words/")
@@ -41,4 +42,7 @@ public interface WordService {
     @Multipart
     @POST("words/ocr")
     Call<OcrResult> parseOcrWords(@Part MultipartBody.Part file);
+
+    @retrofit2.http.DELETE("words/{word_id}")
+    Call<Void> deleteWord(@Path("word_id") int wordId);
 }

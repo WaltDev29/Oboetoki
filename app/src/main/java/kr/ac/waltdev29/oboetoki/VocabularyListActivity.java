@@ -52,13 +52,16 @@ public class VocabularyListActivity extends BaseNavigationActivity {
             binding.btnCancel.setOnClickListener(v -> finish());
         } else {
             setupBottomNavigation(binding.includedBottomNav.bottomNavView, R.id.nav_vocabulary);
-            fetchWords(null);
+            fetchWords(null, "desc");
         }
     }
 
     private void setupRecyclerView() {
         adapter = new VocabularyAdapter(new ArrayList<>(), word -> {
             VocabularyDetailDialog dialog = VocabularyDetailDialog.newInstance(word);
+            dialog.setOnWordChangedListener(() -> {
+                fetchWords(null, "desc"); // 기본 정렬/필터로 리프레시 (원하면 현재 필터 유지 가능하지만 지금은 간단히 기본값 사용)
+            });
             dialog.show(getSupportFragmentManager(), "VocabularyDetailDialog");
         });
         binding.recyclerView.setAdapter(adapter);
@@ -69,21 +72,21 @@ public class VocabularyListActivity extends BaseNavigationActivity {
         super.onResume();
         if (!isOcrMode) {
             binding.includedBottomNav.bottomNavView.setSelectedItemId(R.id.nav_vocabulary);
-            fetchWords(null);
+            fetchWords(null, "desc");
         }
         
         binding.btnFilter.setOnClickListener(v -> {
             VocabularyFilterBottomSheet filterSheet = new VocabularyFilterBottomSheet();
-            filterSheet.setOnFilterSelectedListener(isMemorized -> {
-                fetchWords(isMemorized);
+            filterSheet.setOnFilterSelectedListener((isMemorized, sortOrder) -> {
+                fetchWords(isMemorized, sortOrder);
             });
             filterSheet.show(getSupportFragmentManager(), "VocabularyFilter");
         });
     }
 
-    private void fetchWords(Boolean isMemorized) {
+    private void fetchWords(Boolean isMemorized, String sortOrder) {
         RetrofitClient.getWordService(basePreferenceManager)
-                .getWords(isMemorized)
+                .getWords(isMemorized, sortOrder)
                 .enqueue(new Callback<List<Word>>() {
                     @Override
                     public void onResponse(@NonNull Call<List<Word>> call, @NonNull Response<List<Word>> response) {
@@ -125,7 +128,7 @@ public class VocabularyListActivity extends BaseNavigationActivity {
                                 binding.bottomLayout.setVisibility(View.GONE);
                                 binding.includedBottomNav.bottomNavView.setVisibility(View.VISIBLE);
                                 setupBottomNavigation(binding.includedBottomNav.bottomNavView, R.id.nav_vocabulary);
-                                fetchWords(null);
+                                fetchWords(null, "desc");
                             });
                             successDialog.show(getSupportFragmentManager(), "BatchSaveSuccess");
                         } else if (response.code() == 409) {
