@@ -8,6 +8,12 @@
 
     <style name="Theme.Oboetoki" parent="Base.Theme.Oboetoki" />
 
+    <style name="Theme.Oboetoki.Splash" parent="Theme.Oboetoki">
+        <item name="android:windowBackground">@drawable/bg_splash_gradient</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowDisablePreview">true</item>
+    </style>
+
     <style name="ThemeOverlay.Oboetoki.BottomNav" parent="">
         <item name="colorSecondaryContainer">#FCE7F3</item>
     </style>
