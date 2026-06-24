@@ -1,37 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.appcompat.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/toolbar"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="?attr/actionBarSize"
-    android:background="@color/color_ffffff">
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center_vertical">
-        <ImageView
-            android:layout_width="32dp"
-            android:layout_height="32dp"
-            android:src="@drawable/app_logo_pink" />
-        <TextView
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/color_ffffff">
+
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/str_oboetoki"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            android:textColor="@color/brand_pink_light"
-            android:layout_marginStart="8dp" />
-    </LinearLayout>
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+            <ImageView
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:src="@drawable/app_logo_pink" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/str_oboetoki"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textColor="@color/brand_pink_light"
+                android:layout_marginStart="8dp" />
+        </LinearLayout>
 
-    <ImageButton
-        android:id="@+id/btnMyPage"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:layout_gravity="end|center_vertical"
-        android:layout_marginEnd="8dp"
-        android:src="@drawable/ic_my_page"
-        android:background="?attr/selectableItemBackgroundBorderless"
-        android:tint="@color/color_6b7280" />
+        <ImageButton
+            android:id="@+id/btnMyPage"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_gravity="end|center_vertical"
+            android:layout_marginEnd="8dp"
+            android:src="@drawable/ic_my_page"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:tint="@color/color_6b7280" />
 
-</androidx.appcompat.widget.Toolbar>
+    </androidx.appcompat.widget.Toolbar>
+
+    <!-- 구분선 -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#E5E7EB" />
+</LinearLayout>

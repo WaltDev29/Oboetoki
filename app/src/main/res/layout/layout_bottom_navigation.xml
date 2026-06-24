@@ -1,10 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.google.android.material.bottomnavigation.BottomNavigationView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/bottomNavView"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/color_ffffff"
-    android:theme="@style/ThemeOverlay.Oboetoki.BottomNav"
-    app:menu="@menu/bottom_nav_menu" />
+    android:orientation="vertical">
+
+    <!-- 구분선 -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#E5E7EB" />
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNavView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/color_ffffff"
+        android:theme="@style/ThemeOverlay.Oboetoki.BottomNav"
+        app:itemIconTint="@color/selector_bottom_nav"
+        app:itemTextColor="@color/selector_bottom_nav"
+        app:menu="@menu/bottom_nav_menu" />
+
+</LinearLayout>
