@@ -24,13 +24,29 @@
             android:textSize="20sp"
             android:textStyle="bold" />
 
-        <ImageButton
-            android:id="@+id/btnDelete"
-            android:layout_width="32dp"
-            android:layout_height="32dp"
-            android:src="@android:drawable/ic_menu_delete"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:tint="@color/color_ff85b2" />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            
+            <ImageButton
+                android:id="@+id/btnDelete"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:src="@android:drawable/ic_menu_delete"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:tint="@color/color_6b7280" />
+                
+            <Space android:layout_width="8dp" android:layout_height="wrap_content" />
+            
+            <ImageButton
+                android:id="@+id/btnClose"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:src="@drawable/ic_close"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:tint="@color/color_6b7280" />
+        </LinearLayout>
     </LinearLayout>
 
     <View android:layout_width="match_parent" android:layout_height="1dp" android:background="@color/color_e5e7eb" />
@@ -191,7 +207,7 @@
             android:layout_height="56dp"
             android:text="확인"
             android:textColor="@color/color_ffffff"
-            android:backgroundTint="@color/color_0058be" />
+            android:backgroundTint="@color/brand_pink_light" />
     </LinearLayout>
 
 </LinearLayout>

@@ -73,17 +73,20 @@ public class VocabularyDetailDialog extends BottomSheetDialogFragment {
             return;
         }
 
+        binding.btnClose.setOnClickListener(v -> dismiss());
+
         binding.etOriginalWord.setText(word.originalWord != null ? word.originalWord : "");
         binding.etReading.setText(word.reading != null ? word.reading : "");
         binding.etMeaning.setText(word.translatedWord != null ? word.translatedWord : "");
         binding.tvCreatedAt.setText(word.createdAt != null ? word.createdAt.split("T")[0] : "-");
 
-        if (word.isMemorized) {
-            binding.tvMemorizedStatus.setText("완료");
-            binding.tvMemorizedStatus.setTextColor(getResources().getColor(R.color.color_0058be, null));
-        } else {
-            binding.tvMemorizedStatus.setText("미완료");
-        }
+        updateMemorizedStatusUI();
+
+        binding.tvMemorizedStatus.setOnClickListener(v -> {
+            word.isMemorized = !word.isMemorized;
+            updateMemorizedStatusUI();
+            updateWordMemorizedStatus();
+        });
 
         android.text.TextWatcher textWatcher = new android.text.TextWatcher() {
             @Override public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
@@ -140,6 +143,48 @@ public class VocabularyDetailDialog extends BottomSheetDialogFragment {
             @Override
             public void onFailure(@NonNull Call<Word> call, @NonNull Throwable t) {
                 NotificationDialog.newInstance("오류", "단어 수정 실패: " + t.getMessage()).show(getChildFragmentManager(), "UpdateFail");
+            }
+        });
+    }
+
+    private void updateMemorizedStatusUI() {
+        if (word.isMemorized) {
+            binding.tvMemorizedStatus.setText("완료");
+            binding.tvMemorizedStatus.setTextColor(getResources().getColor(R.color.color_ffffff, null));
+            binding.tvMemorizedStatus.setBackgroundResource(R.drawable.bg_badge_completed);
+        } else {
+            binding.tvMemorizedStatus.setText("미완료");
+            binding.tvMemorizedStatus.setTextColor(getResources().getColor(R.color.color_ff85b2, null));
+            binding.tvMemorizedStatus.setBackgroundResource(R.drawable.bg_badge_primary);
+        }
+    }
+
+    private void updateWordMemorizedStatus() {
+        HashMap<String, Object> req = new HashMap<>();
+        req.put("original_word", word.originalWord != null ? word.originalWord : "");
+        req.put("reading", word.reading != null ? word.reading : "");
+        req.put("translated_word", word.translatedWord != null ? word.translatedWord : "");
+        req.put("is_memorized", word.isMemorized);
+
+        PreferenceManager pref = new PreferenceManager(requireContext());
+        RetrofitClient.getWordService(pref).updateWord(word.id, req).enqueue(new Callback<Word>() {
+            @Override
+            public void onResponse(@NonNull Call<Word> call, @NonNull Response<Word> response) {
+                if (response.isSuccessful()) {
+                    if (listener != null) listener.onWordChanged();
+                } else {
+                    // API 실패 시 롤백
+                    word.isMemorized = !word.isMemorized;
+                    updateMemorizedStatusUI();
+                    Toast.makeText(requireContext(), "상태 변경 실패", Toast.LENGTH_SHORT).show();
+                }
+            }
+            @Override
+            public void onFailure(@NonNull Call<Word> call, @NonNull Throwable t) {
+                // API 실패 시 롤백
+                word.isMemorized = !word.isMemorized;
+                updateMemorizedStatusUI();
+                Toast.makeText(requireContext(), "네트워크 오류", Toast.LENGTH_SHORT).show();
             }
         });
     }
