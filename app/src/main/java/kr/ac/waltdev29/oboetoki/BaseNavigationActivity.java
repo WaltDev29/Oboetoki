@@ -100,12 +100,14 @@ public abstract class BaseNavigationActivity extends AppCompatActivity {
 
     protected void setupBottomNavigation(BottomNavigationView bottomNavigationView, int currentItemId) {
         if (currentItemId != -1) {
+            bottomNavigationView.getMenu().setGroupCheckable(0, true, true);
             bottomNavigationView.getMenu().findItem(currentItemId).setChecked(true);
         } else {
-            // Uncheck all items for MyPage
+            // Uncheck all items for MyPage without breaking UI styling
+            bottomNavigationView.getMenu().setGroupCheckable(0, true, false);
             int size = bottomNavigationView.getMenu().size();
             for (int i = 0; i < size; i++) {
-                bottomNavigationView.getMenu().getItem(i).setCheckable(false);
+                bottomNavigationView.getMenu().getItem(i).setChecked(false);
             }
         }
 
