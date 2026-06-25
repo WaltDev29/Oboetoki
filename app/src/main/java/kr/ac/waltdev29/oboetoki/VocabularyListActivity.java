@@ -87,14 +87,17 @@ public class VocabularyListActivity extends BaseNavigationActivity {
         });
 
         binding.tvHeaderOriginal.setOnClickListener(v -> {
+            v.setSelected(!v.isSelected());
             adapter.setOriginalMasked(!adapter.isOriginalMasked());
         });
 
         binding.tvHeaderReading.setOnClickListener(v -> {
+            v.setSelected(!v.isSelected());
             adapter.setReadingMasked(!adapter.isReadingMasked());
         });
 
         binding.tvHeaderTranslated.setOnClickListener(v -> {
+            v.setSelected(!v.isSelected());
             adapter.setTranslatedMasked(!adapter.isTranslatedMasked());
         });
     }
