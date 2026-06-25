@@ -21,6 +21,7 @@ public interface WordService {
     @GET("words/")
     Call<List<Word>> getWords(
             @Query("is_memorized") Boolean isMemorized,
+            @Query("source_language") String sourceLanguage,
             @Query("sort_order") String sortOrder
     );
 
@@ -31,7 +32,10 @@ public interface WordService {
     Call<BatchWordResponse> addWordsBatch(@Body List<Word> request);
 
     @GET("words/search")
-    Call<List<Word>> searchWords(@Query("q") String query);
+    Call<List<Word>> searchWords(
+            @Query("q") String query,
+            @Query("source_language") String sourceLanguage
+    );
 
     @GET("words/{word_id}")
     Call<Word> getWordDetail(@Path("word_id") int wordId);

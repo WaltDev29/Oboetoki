@@ -30,7 +30,7 @@ public class MainActivity extends BaseNavigationActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        binding.includedBottomNav.bottomNavView.setSelectedItemId(R.id.nav_home);
+        binding.includedBottomNav.bottomNavView.getMenu().findItem(R.id.nav_home).setChecked(true);
         fetchMainData(); // Refresh data on resume
     }
 

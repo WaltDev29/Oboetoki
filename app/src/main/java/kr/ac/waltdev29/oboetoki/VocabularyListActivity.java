@@ -33,6 +33,7 @@ public class VocabularyListActivity extends BaseNavigationActivity {
     private VocabularyAdapter adapter;
     private Handler searchHandler = new Handler(Looper.getMainLooper());
     private Runnable searchRunnable;
+    private String sourceLanguage = "en";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,11 +41,24 @@ public class VocabularyListActivity extends BaseNavigationActivity {
         binding = ActivityVocabularyListBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        if (getIntent() != null && getIntent().hasExtra("source_language")) {
+            sourceLanguage = getIntent().getStringExtra("source_language");
+        }
+
         setupRecyclerView();
         setupSearchDebounce();
 
         setupBottomNavigation(binding.includedBottomNav.bottomNavView, R.id.nav_vocabulary);
         fetchWords(null, "desc");
+    }
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        setIntent(intent);
+        if (intent != null && intent.hasExtra("source_language")) {
+            sourceLanguage = intent.getStringExtra("source_language");
+        }
     }
 
     private void setupRecyclerView() {
@@ -61,7 +75,7 @@ public class VocabularyListActivity extends BaseNavigationActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        binding.includedBottomNav.bottomNavView.setSelectedItemId(R.id.nav_vocabulary);
+        binding.includedBottomNav.bottomNavView.getMenu().findItem(R.id.nav_vocabulary).setChecked(true);
         fetchWords(null, "desc");
         
         binding.btnFilter.setOnClickListener(v -> {
@@ -87,7 +101,7 @@ public class VocabularyListActivity extends BaseNavigationActivity {
 
     private void fetchWords(Boolean isMemorized, String sortOrder) {
         RetrofitClient.getWordService(basePreferenceManager)
-                .getWords(isMemorized, sortOrder)
+                .getWords(isMemorized, sourceLanguage, sortOrder)
                 .enqueue(new Callback<List<Word>>() {
                     @Override
                     public void onResponse(@NonNull Call<List<Word>> call, @NonNull Response<List<Word>> response) {
@@ -134,7 +148,7 @@ public class VocabularyListActivity extends BaseNavigationActivity {
 
     private void searchWords(String query) {
         RetrofitClient.getWordService(basePreferenceManager)
-                .searchWords(query)
+                .searchWords(query, sourceLanguage)
                 .enqueue(new Callback<List<Word>>() {
                     @Override
                     public void onResponse(@NonNull Call<List<Word>> call, @NonNull Response<List<Word>> response) {

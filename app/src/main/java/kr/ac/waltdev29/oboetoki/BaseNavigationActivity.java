@@ -98,7 +98,7 @@ public abstract class BaseNavigationActivity extends AppCompatActivity {
 
     protected void setupBottomNavigation(BottomNavigationView bottomNavigationView, int currentItemId) {
         if (currentItemId != -1) {
-            bottomNavigationView.setSelectedItemId(currentItemId);
+            bottomNavigationView.getMenu().findItem(currentItemId).setChecked(true);
         } else {
             // Uncheck all items for MyPage
             int size = bottomNavigationView.getMenu().size();
@@ -118,15 +118,26 @@ public abstract class BaseNavigationActivity extends AppCompatActivity {
                 return true;
             } else if (itemId == R.id.nav_camera) {
                 showImageSelectionDialog();
-                bottomNavigationView.post(() -> bottomNavigationView.setSelectedItemId(currentItemId));
+                bottomNavigationView.post(() -> {
+                    if (currentItemId != -1) {
+                        bottomNavigationView.getMenu().findItem(currentItemId).setChecked(true);
+                    }
+                });
                 return true;
             } else if (itemId == R.id.nav_vocabulary) {
-                if (currentItemId != R.id.nav_vocabulary) {
+                LanguageSelectDialog dialog = new LanguageSelectDialog();
+                dialog.setOnLanguageSelectedListener(sourceLanguage -> {
                     Intent intent = new Intent(this, VocabularyListActivity.class);
+                    intent.putExtra("source_language", sourceLanguage);
                     intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                     startActivity(intent);
+                });
+                dialog.show(getSupportFragmentManager(), "LanguageSelectDialog");
+
+                if (currentItemId == R.id.nav_vocabulary) {
+                    return true;
                 }
-                return true;
+                return false;
             }
             return false;
         });
