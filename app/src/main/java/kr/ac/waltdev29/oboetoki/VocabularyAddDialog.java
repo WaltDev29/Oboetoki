@@ -74,7 +74,7 @@ public class VocabularyAddDialog extends DialogFragment {
         binding = DialogVocabularyDetailBinding.inflate(inflater, container, false);
 
         // UI Setup
-        binding.tvTitle.setText("단어 직접 등록");
+        binding.tvTitle.setText("단어 등록");
         binding.btnDelete.setVisibility(View.GONE);
         binding.layoutCreatedAt.setVisibility(View.GONE);
         binding.layoutMemorizedStatus.setVisibility(View.GONE);

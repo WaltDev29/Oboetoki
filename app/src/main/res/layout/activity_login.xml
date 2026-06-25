@@ -19,7 +19,7 @@
         <ImageView
             android:layout_width="48dp"
             android:layout_height="48dp"
-            android:src="@drawable/app_logo_pink" />
+            android:src="@drawable/app_logo" />
 
         <TextView
             android:layout_width="wrap_content"
