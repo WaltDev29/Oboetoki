@@ -71,13 +71,10 @@ public class LoginActivity extends AppCompatActivity {
                             preferenceManager.saveToken(token);
                             preferenceManager.setAutoLogin(binding.cbAutoLogin.isChecked());
 
-                            NotificationDialog dialog = NotificationDialog.newInstance("알림", "로그인에 성공했습니다.");
-                            dialog.setOnDismissAction(() -> {
-                                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                                startActivity(intent);
-                                finish();
-                            });
-                            dialog.show(getSupportFragmentManager(), "LoginSuccess");
+                            Toast.makeText(LoginActivity.this, "로그인에 성공했습니다.", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                            startActivity(intent);
+                            finish();
                         } else {
                             NotificationDialog.newInstance("알림", "로그인에 실패했습니다.").show(getSupportFragmentManager(), "LoginFail");
                         }
