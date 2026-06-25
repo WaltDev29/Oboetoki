@@ -23,8 +23,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="단어 상세 정보"
-            android:textColor="@color/color_111827"
+            android:text="@string/title_word_detail"
+            android:textColor="@color/gray_900"
             android:textSize="20sp"
             android:textStyle="bold" />
 
@@ -39,7 +39,7 @@
                 android:layout_height="32dp"
                 android:src="@android:drawable/ic_menu_delete"
                 android:background="?attr/selectableItemBackgroundBorderless"
-                android:tint="@color/color_6b7280" />
+                android:tint="@color/gray_500" />
                 
             <Space android:layout_width="8dp" android:layout_height="wrap_content" />
             
@@ -49,11 +49,11 @@
                 android:layout_height="32dp"
                 android:src="@drawable/ic_close"
                 android:background="?attr/selectableItemBackgroundBorderless"
-                android:tint="@color/color_6b7280" />
+                android:tint="@color/gray_500" />
         </LinearLayout>
     </LinearLayout>
 
-    <View android:layout_width="match_parent" android:layout_height="1dp" android:background="@color/color_e5e7eb" />
+    <View android:layout_width="match_parent" android:layout_height="1dp" android:background="@color/gray_200" />
 
     <!-- Content -->
     <LinearLayout
@@ -73,8 +73,8 @@
             <TextView
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
-                android:text="원어"
-                android:textColor="@color/color_6b7280"
+                android:text="@string/header_original_word"
+                android:textColor="@color/gray_500"
                 android:textSize="14sp"
                 android:textStyle="bold" />
             <EditText
@@ -84,7 +84,7 @@
                 android:layout_weight="1"
                 android:background="@null"
                 android:text="-"
-                android:textColor="@color/color_111827"
+                android:textColor="@color/gray_900"
                 android:textSize="16sp"
                 android:singleLine="true"
                 android:imeOptions="actionDone"
@@ -101,7 +101,7 @@
                 android:scaleType="fitCenter"
                 android:background="?attr/selectableItemBackgroundBorderless" />
         </LinearLayout>
-        <View android:layout_width="match_parent" android:layout_height="1dp" android:background="@color/color_f3f4f6" />
+        <View android:layout_width="match_parent" android:layout_height="1dp" android:background="@color/gray_100" />
 
         <!-- 발음 -->
         <LinearLayout
@@ -113,8 +113,8 @@
             <TextView
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
-                android:text="발음"
-                android:textColor="@color/color_6b7280"
+                android:text="@string/header_reading"
+                android:textColor="@color/gray_500"
                 android:textSize="14sp"
                 android:textStyle="bold" />
             <EditText
@@ -124,7 +124,7 @@
                 android:layout_weight="1"
                 android:background="@null"
                 android:text="-"
-                android:textColor="@color/color_111827"
+                android:textColor="@color/gray_900"
                 android:textSize="16sp"
                 android:singleLine="true"
                 android:imeOptions="actionDone"
@@ -141,7 +141,7 @@
                 android:scaleType="fitCenter"
                 android:background="?attr/selectableItemBackgroundBorderless" />
         </LinearLayout>
-        <View android:layout_width="match_parent" android:layout_height="1dp" android:background="@color/color_f3f4f6" />
+        <View android:layout_width="match_parent" android:layout_height="1dp" android:background="@color/gray_100" />
 
         <!-- 한국어 뜻 -->
         <LinearLayout
@@ -153,8 +153,8 @@
             <TextView
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
-                android:text="한국어 뜻"
-                android:textColor="@color/color_6b7280"
+                android:text="@string/header_meaning"
+                android:textColor="@color/gray_500"
                 android:textSize="14sp"
                 android:textStyle="bold" />
             <EditText
@@ -164,7 +164,7 @@
                 android:layout_weight="1"
                 android:background="@null"
                 android:text="-"
-                android:textColor="@color/color_111827"
+                android:textColor="@color/gray_900"
                 android:textSize="16sp"
                 android:singleLine="true"
                 android:imeOptions="actionDone"
@@ -181,7 +181,7 @@
                 android:scaleType="fitCenter"
                 android:background="?attr/selectableItemBackgroundBorderless" />
         </LinearLayout>
-        <View android:layout_width="match_parent" android:layout_height="1dp" android:background="@color/color_f3f4f6" />
+        <View android:layout_width="match_parent" android:layout_height="1dp" android:background="@color/gray_100" />
 
         <!-- 등록 날짜 -->
         <LinearLayout
@@ -194,8 +194,8 @@
             <TextView
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
-                android:text="등록 날짜"
-                android:textColor="@color/color_6b7280"
+                android:text="@string/label_created_at"
+                android:textColor="@color/gray_500"
                 android:textSize="14sp"
                 android:textStyle="bold" />
             <TextView
@@ -204,10 +204,10 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="-"
-                android:textColor="@color/color_111827"
+                android:textColor="@color/gray_900"
                 android:textSize="16sp" />
         </LinearLayout>
-        <View android:layout_width="match_parent" android:layout_height="1dp" android:background="@color/color_f3f4f6" />
+        <View android:layout_width="match_parent" android:layout_height="1dp" android:background="@color/gray_100" />
 
         <!-- 기억 여부 -->
         <LinearLayout
@@ -221,8 +221,8 @@
             <TextView
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
-                android:text="암기 여부"
-                android:textColor="@color/color_6b7280"
+                android:text="@string/label_memorized_status"
+                android:textColor="@color/gray_500"
                 android:textSize="14sp"
                 android:textStyle="bold" />
 
@@ -233,8 +233,8 @@
                 android:paddingHorizontal="12dp"
                 android:paddingVertical="4dp"
                 android:background="@drawable/bg_badge_primary"
-                android:text="미완료"
-                android:textColor="@color/color_ff85b2"
+                android:text="@string/status_not_memorized"
+                android:textColor="@color/brand_pink"
                 android:textSize="12sp"
                 android:textStyle="bold" />
         </LinearLayout>
@@ -252,8 +252,8 @@
             <TextView
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
-                android:text="언어 선택"
-                android:textColor="@color/color_6b7280"
+                android:text="@string/label_language_select"
+                android:textColor="@color/gray_500"
                 android:textSize="14sp"
                 android:textStyle="bold" />
 
@@ -264,8 +264,8 @@
                 android:paddingHorizontal="12dp"
                 android:paddingVertical="4dp"
                 android:background="@drawable/bg_badge_primary"
-                android:text="영어"
-                android:textColor="@color/color_ff85b2"
+                android:text="@string/lang_en_short"
+                android:textColor="@color/brand_pink"
                 android:textSize="12sp"
                 android:textStyle="bold"
                 android:clickable="true"
@@ -287,8 +287,8 @@
             android:id="@+id/btnConfirm"
             android:layout_width="match_parent"
             android:layout_height="56dp"
-            android:text="확인"
-            android:textColor="@color/color_ffffff"
+            android:text="@string/action_confirm"
+            android:textColor="@color/white"
             android:backgroundTint="@color/brand_pink_light" />
     </LinearLayout>
 

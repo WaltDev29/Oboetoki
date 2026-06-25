@@ -93,13 +93,13 @@ public class VocabularyAdapter extends RecyclerView.Adapter<VocabularyAdapter.Vi
         holder.binding.tvTranslatedWord.setText(word.translatedWord);
         
         boolean originalMasked = isOriginalMasked && !peekedOriginals.contains(word.id);
-        applyMasking(holder.binding.tvOriginalWord, originalMasked, R.color.color_111827);
+        applyMasking(holder.binding.tvOriginalWord, originalMasked, R.color.gray_900);
         
         boolean readingMasked = isReadingMasked && !peekedReadings.contains(word.id);
-        applyMasking(holder.binding.tvReading, readingMasked, R.color.color_4b5563);
+        applyMasking(holder.binding.tvReading, readingMasked, R.color.gray_600);
         
         boolean translatedMasked = isTranslatedMasked && !peekedTranslations.contains(word.id);
-        applyMasking(holder.binding.tvTranslatedWord, translatedMasked, R.color.color_4b5563);
+        applyMasking(holder.binding.tvTranslatedWord, translatedMasked, R.color.gray_600);
         
         holder.binding.getRoot().setOnClickListener(v -> onItemClick.onItemClick(word));
 

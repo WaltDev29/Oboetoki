@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="24dp"
-    app:cardBackgroundColor="@color/color_ffffff"
+    app:cardBackgroundColor="@color/white"
     app:cardCornerRadius="28dp"
     app:cardElevation="8dp">
 
@@ -40,7 +40,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
             android:gravity="center"
-            android:text="진행하시겠습니까?"
+            android:text="@string/title_confirm_proceed"
             android:textColor="@color/on_surface"
             android:textSize="22sp"
             android:textStyle="bold" />
@@ -53,7 +53,7 @@
             android:layout_marginBottom="32dp"
             android:gravity="center"
             android:lineSpacingExtra="4dp"
-            android:text="선택한 작업을 진행하시겠습니까?"
+            android:text="@string/msg_confirm_proceed"
             android:textColor="@color/on_surface_variant"
             android:textSize="16sp" />
 
@@ -70,24 +70,24 @@
                 android:layout_height="56dp"
                 android:layout_weight="1"
                 android:layout_marginEnd="6dp"
-                android:text="취소"
-                android:textColor="#FF78A6"
+                android:text="@string/action_cancel"
+                android:textColor="@color/pink_400_alt"
                 android:textSize="14sp"
                 android:textStyle="bold"
-                app:backgroundTint="@color/color_ffffff"
+                app:backgroundTint="@color/white"
                 app:cornerRadius="28dp"
-                app:strokeColor="#FF78A6"
+                app:strokeColor="@color/pink_400_alt"
                 app:strokeWidth="1.5dp" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnConfirm"
                 style="@style/Widget.Material3.Button"
-                android:backgroundTint="#FF78A6"
+                android:backgroundTint="@color/pink_400_alt"
                 android:layout_width="0dp"
                 android:layout_height="56dp"
                 android:layout_weight="1"
                 android:layout_marginStart="6dp"
-                android:text="확인"
+                android:text="@string/action_confirm"
                 android:textSize="14sp"
                 android:textStyle="bold"
                 app:cornerRadius="28dp" />

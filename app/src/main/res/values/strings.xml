@@ -1,49 +1,80 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Oboetoki</string>
-    <string name="str_oboetoki">Oboetoki</string>
-    <string name="str_ocr">단어 인식 (OCR)</string>
-    <string name="str_1">사진 촬영</string>
-    <string name="str_2">갤러리</string>
-    <string name="str_3">단어 추출하기</string>
-    <string name="str_4">모두 추가</string>
-    <string name="str_5">취소</string>
-    <string name="str_7">아이디</string>
-    <string name="str_8">비밀번호</string>
-    <string name="str_9">자동 로그인</string>
-    <string name="str_10">로그인</string>
-    <string name="str_11">회원가입</string>
-    <string name="str_12">아이디를 입력하세요</string>
-    <string name="str_13">비밀번호를 입력하세요</string>
-    <string name="str_14">🔥 연속 출석</string>
-    <string name="str_15">일</string>
-    <string name="str_16">단어 현황</string>
-    <string name="str_17">등록 단어 수</string>
-    <string name="str_18">외운 단어 수</string>
-    <string name="str_19">오늘의 한마디</string>
-    <string name="str_20">회원가입</string>
-    <string name="str_21">아이디</string>
-    <string name="str_22">중복 확인</string>
-    <string name="str_23">비밀번호</string>
-    <string name="str_24">비밀번호 확인</string>
-    <string name="str_25">이름</string>
-    <string name="str_26">전화번호</string>
-    <string name="str_27">이메일</string>
-    <string name="str_28">회원가입</string>
-    <string name="str_29">취소</string>
-    <string name="str_30">아이디를 입력하세요</string>
-    <string name="str_31">비밀번호를 입력하세요</string>
-    <string name="str_32">비밀번호를 다시 입력하세요</string>
-    <string name="str_33">이름을 입력하세요</string>
-    <string name="str_010_1234_5678">010-1234-5678</string>
-    <string name="str_35">이메일을 입력하세요</string>
-    <string name="str_36">원어</string>
-    <string name="str_37">뜻</string>
-    <string name="str_38">단어 검색</string>
-    <string name="str_apple">apple</string>
-    <string name="str_40">사과</string>
-    <string name="str_41">홈</string>
-    <string name="str_42">카메라</string>
-    <string name="str_43">단어장</string>
-    <string name="str_reading">발음</string>
+    <string name="app_title">Oboetoki</string>
+    
+    <string name="action_take_photo">사진 촬영</string>
+    <string name="action_gallery">갤러리</string>
+    <string name="action_extract_words">단어 추출하기</string>
+    <string name="action_add_all">모두 추가</string>
+    <string name="action_cancel">취소</string>
+    <string name="action_login">로그인</string>
+    <string name="action_signup">회원가입</string>
+    <string name="action_check_duplicate">중복확인</string>
+    <string name="action_do_signup">회원가입</string>
+    <string name="action_signup_cancel">취소</string>
+    <string name="action_logout">로그아웃</string>
+    <string name="action_confirm">확인</string>
+    <string name="action_save">저장</string>
+
+    <string name="label_password">비밀번호</string>
+    <string name="label_auto_login">자동 로그인</string>
+    <string name="label_days">일</string>
+    <string name="label_total_words">등록 단어 수</string>
+    <string name="label_memorized_words">외운 단어 수</string>
+    <string name="label_signup_id">아이디</string>
+    <string name="label_signup_password">비밀번호</string>
+    <string name="label_signup_password_confirm">비밀번호 확인</string>
+    <string name="label_name">이름</string>
+    <string name="label_phone">전화번호</string>
+    <string name="label_email">이메일</string>
+    <string name="label_created_at">등록 날짜</string>
+    <string name="label_memorized_status">암기 여부</string>
+    <string name="label_language_select">언어 선택</string>
+
+    <string name="hint_enter_password">비밀번호를 입력하세요</string>
+    <string name="hint_signup_id">아이디를 입력하세요</string>
+    <string name="hint_signup_password">비밀번호를 입력하세요</string>
+    <string name="hint_signup_password_confirm">비밀번호를 다시 입력하세요</string>
+    <string name="hint_name">이름을 입력하세요</string>
+    <string name="hint_phone">010-1234-5678</string>
+    <string name="hint_search_word">단어 검색</string>
+    <string name="hint_example_word">apple</string>
+    <string name="hint_example_meaning">사과</string>
+
+    <string name="title_consecutive_attendance">🔥 연속 출석</string>
+    <string name="title_word_status">단어 현황</string>
+    <string name="title_quote_of_the_day">오늘의 한마디</string>
+    <string name="title_signup">회원가입</string>
+    <string name="title_app_info">앱 정보</string>
+    <string name="title_notification">알림</string>
+    <string name="title_language_select">단어장 언어 선택</string>
+    <string name="title_word_detail">단어 상세 정보</string>
+    <string name="title_extracted_words">추출된 단어</string>
+    <string name="title_confirm_proceed">진행하시겠습니까?</string>
+    <string name="title_filter">필터</string>
+
+    <string name="header_original_word">원어</string>
+    <string name="header_meaning">뜻</string>
+    <string name="header_reading">발음</string>
+
+    <string name="nav_home">홈</string>
+    <string name="nav_camera">카메라</string>
+    <string name="nav_vocabulary">단어장</string>
+
+    <string name="msg_password_condition">* 8~12자 이내, 특수문자 1개 이상 포함</string>
+    <string name="msg_loading">불러오는 중...</string>
+    <string name="msg_confirm_proceed">선택한 작업을 진행하시겠습니까?</string>
+    
+    <string name="lang_en">영어 (English)</string>
+    <string name="lang_ja">일본어 (日本語)</string>
+    <string name="lang_en_short">영어</string>
+
+    <string name="status_not_memorized">미완료</string>
+
+    <string name="filter_all_words">전체 단어</string>
+    <string name="filter_not_memorized">아직 못 외운 단어</string>
+    <string name="filter_memorized">외운 단어</string>
+    <string name="sort_recent">최근 등록 순</string>
+    <string name="sort_oldest">과거 등록 순</string>
 </resources>

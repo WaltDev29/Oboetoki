@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/color_ffffff">
+    android:background="@color/white">
 
     <include layout="@layout/layout_header" />
 
@@ -40,7 +41,7 @@
                         android:scaleX="1.1"
                         android:scaleY="1.0"
                         android:src="@drawable/app_logo_pink"
-                        app:tint="@color/color_ffffff" />
+                        app:tint="@color/white" />
                 </FrameLayout>
                 
                 <LinearLayout
@@ -53,17 +54,17 @@
                         android:id="@+id/tvUserName"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="불러오는 중..."
+                        android:text="@string/msg_loading"
                         android:textSize="20sp"
                         android:textStyle="bold"
-                        android:textColor="@color/color_111827" />
+                        android:textColor="@color/gray_900" />
                     <TextView
                         android:id="@+id/tvUserEmail"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="..."
+                        tools:text="..."
                         android:textSize="14sp"
-                        android:textColor="@color/color_6b7280"
+                        android:textColor="@color/gray_500"
                         android:layout_marginTop="4dp" />
                 </LinearLayout>
             </LinearLayout>
@@ -90,14 +91,14 @@
                     android:layout_width="24dp"
                     android:layout_height="24dp"
                     android:src="@drawable/ic_help"
-                    app:tint="@color/color_6b7280" />
+                    app:tint="@color/gray_500" />
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="앱 정보"
+                    android:text="@string/title_app_info"
                     android:textSize="16sp"
-                    android:textColor="@color/color_111827"
+                    android:textColor="@color/gray_900"
                     android:layout_marginStart="16dp" />
             </LinearLayout>
 
@@ -122,14 +123,14 @@
                     android:layout_width="24dp"
                     android:layout_height="24dp"
                     android:src="@drawable/ic_logout"
-                    app:tint="@color/color_ff85b2" />
+                    app:tint="@color/brand_pink" />
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="로그아웃"
+                    android:text="@string/action_logout"
                     android:textSize="16sp"
-                    android:textColor="@color/color_ff85b2"
+                    android:textColor="@color/brand_pink"
                     android:layout_marginStart="16dp" />
             </LinearLayout>
 

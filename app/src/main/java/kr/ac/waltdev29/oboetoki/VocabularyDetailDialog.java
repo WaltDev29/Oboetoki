@@ -222,11 +222,11 @@ public class VocabularyDetailDialog extends DialogFragment {
     private void updateMemorizedStatusUI() {
         if (word.isMemorized) {
             binding.tvMemorizedStatus.setText("완료");
-            binding.tvMemorizedStatus.setTextColor(getResources().getColor(R.color.color_ffffff, null));
+            binding.tvMemorizedStatus.setTextColor(getResources().getColor(R.color.white, null));
             binding.tvMemorizedStatus.setBackgroundResource(R.drawable.bg_badge_completed);
         } else {
             binding.tvMemorizedStatus.setText("미완료");
-            binding.tvMemorizedStatus.setTextColor(getResources().getColor(R.color.color_ff85b2, null));
+            binding.tvMemorizedStatus.setTextColor(getResources().getColor(R.color.brand_pink, null));
             binding.tvMemorizedStatus.setBackgroundResource(R.drawable.bg_badge_primary);
         }
     }

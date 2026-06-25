@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/color_f8f9ff"
+    android:background="@color/blue_50"
     android:gravity="center_vertical"
     android:padding="24dp">
 
@@ -24,8 +24,8 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/str_oboetoki"
-            android:textColor="@color/color_ff85b2"
+            android:text="@string/app_title"
+            android:textColor="@color/brand_pink"
             android:textSize="28sp"
             android:textStyle="bold"
             android:layout_marginStart="12dp" />
@@ -41,8 +41,8 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="이메일"
-            android:textColor="@color/color_544247"
+            android:text="@string/label_email"
+            android:textColor="@color/brown_900"
             android:textSize="14sp"
             android:textStyle="bold" />
 
@@ -54,15 +54,15 @@
             android:background="@drawable/bg_input_field"
             android:paddingHorizontal="16dp"
             android:hint="이메일을 입력하세요"
-            android:textColorHint="@color/color_80544247"
+            android:textColorHint="@color/brown_900_alpha50"
             android:textSize="16sp"
             android:inputType="textEmailAddress" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/str_8"
-            android:textColor="@color/color_544247"
+            android:text="@string/label_password"
+            android:textColor="@color/brown_900"
             android:textSize="14sp"
             android:textStyle="bold"
             android:layout_marginTop="24dp" />
@@ -79,8 +79,8 @@
                 android:background="@drawable/bg_input_field"
                 android:paddingStart="16dp"
                 android:paddingEnd="48dp"
-                android:hint="@string/str_13"
-                android:textColorHint="@color/color_80544247"
+                android:hint="@string/hint_enter_password"
+                android:textColorHint="@color/brown_900_alpha50"
                 android:textSize="16sp"
                 android:inputType="textPassword" />
 
@@ -91,17 +91,17 @@
                 android:layout_gravity="end|center_vertical"
                 android:src="@drawable/ic_eye_off"
                 android:background="?attr/selectableItemBackgroundBorderless"
-                app:tint="@color/color_6b7280" />
+                app:tint="@color/gray_500" />
         </FrameLayout>
 
         <CheckBox
             android:id="@+id/cbAutoLogin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/str_9"
-            android:textColor="@color/color_544247"
+            android:text="@string/label_auto_login"
+            android:textColor="@color/brown_900"
             android:layout_marginTop="16dp"
-            android:buttonTint="@color/color_ff85b2" />
+            android:buttonTint="@color/brand_pink" />
 
     </LinearLayout>
 
@@ -110,8 +110,8 @@
         android:layout_width="match_parent"
         android:layout_height="56dp"
         android:layout_marginTop="32dp"
-        android:text="@string/str_10"
-        android:textColor="@color/color_ffffff"
+        android:text="@string/action_login"
+        android:textColor="@color/white"
         android:textSize="16sp"
         android:textStyle="bold"
         android:background="@drawable/bg_button_primary"
@@ -122,8 +122,8 @@
         android:layout_width="match_parent"
         android:layout_height="56dp"
         android:layout_marginTop="16dp"
-        android:text="@string/str_11"
-        android:textColor="@color/color_ff85b2"
+        android:text="@string/action_signup"
+        android:textColor="@color/brand_pink"
         android:textSize="16sp"
         android:textStyle="bold"
         android:background="@drawable/bg_button_outline"

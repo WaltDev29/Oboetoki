@@ -9,13 +9,13 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="#E5E7EB" />
+        android:background="@color/gray_200" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/color_ffffff"
+        android:background="@color/white"
         android:theme="@style/ThemeOverlay.Oboetoki.BottomNav"
         app:itemIconTint="@color/selector_bottom_nav"
         app:itemTextColor="@color/selector_bottom_nav"

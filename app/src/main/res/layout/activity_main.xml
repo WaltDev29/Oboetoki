@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#FFFFFF">
+    android:background="@color/white">
 
     <include layout="@layout/layout_header" />
 
@@ -38,7 +39,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/str_14"
+                        android:text="@string/title_consecutive_attendance"
                         android:textStyle="bold"
                         android:textSize="16sp" />
                     
@@ -56,11 +57,11 @@
                             android:textSize="36sp"
                             android:textStyle="bold"
                             android:includeFontPadding="false"
-                            android:textColor="@color/color_ff85b2" />
+                            android:textColor="@color/brand_pink" />
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/str_15"
+                            android:text="@string/label_days"
                             android:textSize="18sp"
                             android:includeFontPadding="false"
                             android:layout_marginBottom="4dp"
@@ -85,7 +86,7 @@
                 android:layout_marginTop="16dp"
                 app:cardCornerRadius="16dp"
                 app:cardElevation="2dp"
-                app:cardBackgroundColor="@color/color_ffffff">
+                app:cardBackgroundColor="@color/white">
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -94,7 +95,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/str_16"
+                        android:text="@string/title_word_status"
                         android:textStyle="bold"
                         android:textSize="16sp" />
 
@@ -119,8 +120,8 @@
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="@string/str_17"
-                                    android:textColor="@color/color_6b7280"
+                                    android:text="@string/label_total_words"
+                                    android:textColor="@color/gray_500"
                                     android:textSize="12sp" />
 
                                 <LinearLayout
@@ -158,8 +159,8 @@
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="@string/str_18"
-                                    android:textColor="@color/color_6b7280"
+                                    android:text="@string/label_memorized_words"
+                                    android:textColor="@color/gray_500"
                                     android:textSize="12sp" />
 
                                 <LinearLayout
@@ -201,9 +202,9 @@
                                 android:layout_gravity="center"
                                 android:max="100"
                                 android:progress="0"
-                                app:indicatorColor="@color/color_ff85b2"
+                                app:indicatorColor="@color/brand_pink"
                                 app:indicatorSize="64dp"
-                                app:trackColor="#F3F4F6"
+                                app:trackColor="@color/gray_100"
                                 app:trackThickness="6dp" />
 
                             <TextView
@@ -213,8 +214,8 @@
                                 android:layout_gravity="center"
                                 android:gravity="center"
                                 android:includeFontPadding="false"
-                                android:text="0%"
-                                android:textColor="@color/color_ff85b2"
+                                tools:text="0%"
+                                android:textColor="@color/brand_pink"
                                 android:textSize="12sp"
                                 android:textStyle="bold" />
                         </FrameLayout>
@@ -230,7 +231,7 @@
                 android:layout_marginTop="16dp"
                 app:cardCornerRadius="16dp"
                 app:cardElevation="2dp"
-                app:cardBackgroundColor="@color/color_f8fafc">
+                app:cardBackgroundColor="@color/slate_50">
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -239,14 +240,14 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/str_19"
+                        android:text="@string/title_quote_of_the_day"
                         android:textStyle="bold"
                         android:textSize="14sp" />
                     <TextView
                         android:id="@+id/tvQuote"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="..."
+                        tools:text="..."
                         android:textAlignment="center"
                         android:layout_marginTop="12dp"
                         android:textStyle="italic" />
@@ -254,10 +255,10 @@
                         android:id="@+id/tvQuoteAuthor"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="- Author"
+                        tools:text="- Author"
                         android:textAlignment="viewEnd"
                         android:layout_marginTop="8dp"
-                        android:textColor="@color/color_6b7280"
+                        android:textColor="@color/gray_500"
                         android:textSize="12sp" />
                 </LinearLayout>
             </androidx.cardview.widget.CardView>

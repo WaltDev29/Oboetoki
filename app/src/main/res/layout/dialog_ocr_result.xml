@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="24dp"
-    app:cardBackgroundColor="@color/color_ffffff"
+    app:cardBackgroundColor="@color/white"
     app:cardCornerRadius="24dp"
     app:cardElevation="8dp">
 
@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:background="@color/color_ffffff"
+        android:background="@color/white"
         android:paddingBottom="24dp">
 
     <!-- Header -->
@@ -28,8 +28,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="추출된 단어"
-            android:textColor="@color/color_111827"
+            android:text="@string/title_extracted_words"
+            android:textColor="@color/gray_900"
             android:textSize="20sp"
             android:textStyle="bold" />
 
@@ -39,10 +39,10 @@
             android:layout_height="32dp"
             android:src="@drawable/ic_close"
             android:background="?attr/selectableItemBackgroundBorderless"
-            android:tint="@color/color_6b7280" />
+            android:tint="@color/gray_500" />
     </LinearLayout>
 
-    <View android:layout_width="match_parent" android:layout_height="1dp" android:background="@color/color_e5e7eb" />
+    <View android:layout_width="match_parent" android:layout_height="1dp" android:background="@color/gray_200" />
 
     <!-- Content -->
     <androidx.recyclerview.widget.RecyclerView
@@ -67,9 +67,9 @@
             android:layout_width="0dp"
             android:layout_height="56dp"
             android:layout_weight="1"
-            android:text="취소"
-            android:textColor="@color/color_6b7280"
-            android:backgroundTint="@color/color_f3f4f6" />
+            android:text="@string/action_cancel"
+            android:textColor="@color/gray_500"
+            android:backgroundTint="@color/gray_100" />
             
         <Space android:layout_width="16dp" android:layout_height="wrap_content" />
         
@@ -78,9 +78,9 @@
             android:layout_width="0dp"
             android:layout_height="56dp"
             android:layout_weight="1"
-            android:text="저장"
-            android:textColor="@color/color_ffffff"
-            android:backgroundTint="@color/color_0058be" />
+            android:text="@string/action_save"
+            android:textColor="@color/white"
+            android:backgroundTint="@color/blue_700" />
     </LinearLayout>
     </LinearLayout>
 </androidx.cardview.widget.CardView>

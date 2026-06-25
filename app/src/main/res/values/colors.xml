@@ -1,39 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="color_ffffff">#ffffff</color>
-    <color name="color_0058be">#0058be</color>
-    <color name="color_ff85b2">#ff85b2</color>
-    <color name="color_f9fafb">#f9fafb</color>
-    <color name="color_e5e7eb">#e5e7eb</color>
-    <color name="color_544247">#544247</color>
-    <color name="color_f8f9ff">#f8f9ff</color>
-    <color name="color_eff4ff">#eff4ff</color>
-    <color name="color_80544247">#80544247</color>
-    <color name="color_6b7280">#6b7280</color>
-    <color name="color_fff0f5">#FFF0F5</color>
-    <color name="color_f8fafc">#f8fafc</color>
-    <color name="color_000000">#000000</color>
-    <color name="color_374151">#374151</color>
-    <color name="color_f3f4f6">#f3f4f6</color>
-    <color name="color_eff6ff">#eff6ff</color>
-    <color name="color_111827">#111827</color>
-    <color name="color_4b5563">#4b5563</color>
-    
-    <!-- HTML Design Colors -->
-    <color name="splash_grad_start">#d8f3ff</color>
-    <color name="splash_grad_center">#ffffff</color>
-    <color name="splash_grad_end">#ffe0f0</color>
+    <color name="white">#ffffff</color>
+    <color name="black">#000000</color>
+    <color name="blue_700">#0058be</color>
+    <color name="gray_50">#f9fafb</color>
+    <color name="gray_100">#f3f4f6</color>
+    <color name="gray_200">#e5e7eb</color>
+    <color name="gray_500">#6b7280</color>
+    <color name="gray_600">#4b5563</color>
+    <color name="gray_700">#374151</color>
+    <color name="gray_900">#111827</color>
+    <color name="brown_900">#544247</color>
+    <color name="brown_900_alpha50">#80544247</color>
+    <color name="blue_50">#f8f9ff</color>
+    <color name="blue_100">#eff4ff</color>
+    <color name="slate_50">#f8fafc</color>
     <color name="brand_pink_dark">#ff66aa</color>
     <color name="brand_pink_light">#FF69B4</color>
     <color name="brand_pink_circle">#ff99cc</color>
     <color name="bg_attendance_start">#fdf2f8</color>
     <color name="bg_attendance_end">#fce7f3</color>
     <color name="color_blue_400">#60A5FA</color>
-
-    <!-- Material Colors for UI Components -->
     <color name="primary">#ff85b2</color>
-    <color name="outline">#877177</color>
     <color name="on_surface">#0b1c30</color>
     <color name="on_surface_variant">#544247</color>
-    <color name="surface_container">#e5eeff</color>
+    <color name="brand_pink">#ff85b2</color>
+    <color name="pink_400_alt">#FF78A6</color>
+    <color name="splash_grad_start">#d8f3ff</color>
+    <color name="splash_grad_center">#ffffff</color>
+    <color name="splash_grad_end">#ffe0f0</color>
 </resources>

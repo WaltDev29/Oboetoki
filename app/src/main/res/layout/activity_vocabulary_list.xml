@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/color_ffffff">
+    android:background="@color/white">
 
     <include layout="@layout/layout_header" />
 
@@ -15,7 +15,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:padding="16dp"
-        android:background="@color/color_ffffff"
+        android:background="@color/white"
         android:gravity="center_vertical">
 
         <ImageButton
@@ -23,7 +23,7 @@
             android:layout_width="45dp"
             android:layout_height="45dp"
             android:src="@drawable/ic_filter"
-            android:background="#FFFFFF"
+            android:background="@color/white"
             android:scaleType="center"
             app:tint="@color/brand_pink_dark"
             android:contentDescription="필터" />
@@ -35,7 +35,7 @@
             android:layout_weight="1"
             android:layout_marginStart="12dp"
             android:background="@drawable/bg_search_bar"
-            android:hint="@string/str_38"
+            android:hint="@string/hint_search_word"
             android:paddingHorizontal="16dp"
             android:drawableStart="@drawable/ic_search"
             android:drawablePadding="8dp"
@@ -63,7 +63,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="start|center_vertical"
                 android:paddingVertical="6dp"
-                android:text="@string/str_36"
+                android:text="@string/header_original_word"
                 android:textStyle="bold"
                 android:textColor="@color/color_header_btn_text"
                 android:textSize="13sp"
@@ -84,7 +84,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="start|center_vertical"
                 android:paddingVertical="6dp"
-                android:text="@string/str_reading"
+                android:text="@string/header_reading"
                 android:textStyle="bold"
                 android:textColor="@color/color_header_btn_text"
                 android:textSize="13sp"
@@ -105,7 +105,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="start|center_vertical"
                 android:paddingVertical="6dp"
-                android:text="@string/str_37"
+                android:text="@string/header_meaning"
                 android:textStyle="bold"
                 android:textColor="@color/color_header_btn_text"
                 android:textSize="13sp"
@@ -138,7 +138,7 @@
             android:layout_marginEnd="20dp"
             android:layout_marginBottom="20dp"
             app:backgroundTint="@color/brand_pink_dark"
-            app:tint="@color/color_ffffff"
+            app:tint="@color/white"
             app:borderWidth="0dp"
             app:elevation="4dp"
             app:fabSize="normal"
@@ -157,7 +157,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:padding="16dp"
-        android:background="@color/color_ffffff"
+        android:background="@color/white"
         android:visibility="gone">
 
         <Button
@@ -165,9 +165,9 @@
             android:layout_width="0dp"
             android:layout_height="56dp"
             android:layout_weight="1"
-            android:text="@string/str_4"
-            android:backgroundTint="@color/color_0058be"
-            android:textColor="@color/color_ffffff"
+            android:text="@string/action_add_all"
+            android:backgroundTint="@color/blue_700"
+            android:textColor="@color/white"
             android:textStyle="bold" />
 
         <Button
@@ -176,12 +176,12 @@
             android:layout_height="56dp"
             android:layout_weight="1"
             android:layout_marginStart="16dp"
-            android:text="@string/str_5"
-            android:backgroundTint="@color/color_ffffff"
-            android:textColor="@color/color_ff85b2"
+            android:text="@string/action_cancel"
+            android:backgroundTint="@color/white"
+            android:textColor="@color/brand_pink"
             android:textStyle="bold"
             style="?attr/materialButtonOutlinedStyle"
-            app:strokeColor="@color/color_ff85b2" />
+            app:strokeColor="@color/brand_pink" />
     </LinearLayout>
 
 </LinearLayout>
