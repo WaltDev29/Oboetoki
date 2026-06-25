@@ -13,5 +13,13 @@ public class MainData {
     public int memorizedWords;
     
     @SerializedName("quote_of_the_day")
-    public String quoteOfTheDay;
+    public Quote quoteOfTheDay;
+
+    public static class Quote {
+        @SerializedName("text")
+        public String text;
+        
+        @SerializedName("author")
+        public String author;
+    }
 }

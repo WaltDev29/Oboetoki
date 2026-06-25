@@ -23,6 +23,10 @@ public class MainActivity extends BaseNavigationActivity {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        String[] emojis = {"📚", "✍️", "🔥", "🎯", "🧠", "💡", "🚀"};
+        int dayOfYear = java.util.Calendar.getInstance().get(java.util.Calendar.DAY_OF_YEAR);
+        binding.tvDailyEmoji.setText(emojis[dayOfYear % emojis.length]);
+
         setupBottomNavigation(binding.includedBottomNav.bottomNavView, R.id.nav_home);
         fetchMainData();
     }
@@ -45,7 +49,10 @@ public class MainActivity extends BaseNavigationActivity {
                             binding.tvConsecutiveAttendance.setText(String.valueOf(data.consecutiveAttendance));
                             binding.tvTotalWords.setText(String.valueOf(data.totalWords));
                             binding.tvMemorizedWords.setText(String.valueOf(data.memorizedWords));
-                            binding.tvQuote.setText("\"" + data.quoteOfTheDay + "\"");
+                            if (data.quoteOfTheDay != null) {
+                                binding.tvQuote.setText("\"" + data.quoteOfTheDay.text + "\"");
+                                binding.tvQuoteAuthor.setText("- " + data.quoteOfTheDay.author);
+                            }
 
                             int percent = 0;
                             if (data.totalWords > 0) {
