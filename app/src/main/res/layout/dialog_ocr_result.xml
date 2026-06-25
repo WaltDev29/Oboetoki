@@ -80,7 +80,7 @@
             android:layout_weight="1"
             android:text="@string/action_save"
             android:textColor="@color/white"
-            android:backgroundTint="@color/blue_700" />
+            android:backgroundTint="@color/brand_pink_dark" />
     </LinearLayout>
     </LinearLayout>
 </androidx.cardview.widget.CardView>
