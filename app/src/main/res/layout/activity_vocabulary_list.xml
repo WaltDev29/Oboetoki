@@ -50,50 +50,70 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:paddingHorizontal="24dp"
-        android:paddingVertical="12dp"
-        android:background="#FCE7F3">
+        android:paddingVertical="12dp">
 
-        <TextView
-            android:id="@+id/tvHeaderOriginal"
+        <FrameLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:layout_marginHorizontal="2dp"
-            android:text="@string/str_36"
-            android:textStyle="bold"
-            android:textColor="@color/color_374151"
-            android:textSize="14sp"
-            android:clickable="true"
-            android:focusable="true"
-            android:background="?attr/selectableItemBackground" />
+            android:layout_marginHorizontal="2dp">
+            <TextView
+                android:id="@+id/tvHeaderOriginal"
+                android:layout_width="64dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start|center_vertical"
+                android:paddingVertical="6dp"
+                android:text="@string/str_36"
+                android:textStyle="bold"
+                android:textColor="@color/color_ffffff"
+                android:textSize="13sp"
+                android:gravity="center"
+                android:clickable="true"
+                android:focusable="true"
+                android:background="@drawable/bg_header_btn" />
+        </FrameLayout>
 
-        <TextView
-            android:id="@+id/tvHeaderReading"
+        <FrameLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:layout_marginHorizontal="2dp"
-            android:text="@string/str_reading"
-            android:textStyle="bold"
-            android:textColor="@color/color_374151"
-            android:textSize="14sp"
-            android:clickable="true"
-            android:focusable="true"
-            android:background="?attr/selectableItemBackground" />
+            android:layout_marginHorizontal="2dp">
+            <TextView
+                android:id="@+id/tvHeaderReading"
+                android:layout_width="64dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start|center_vertical"
+                android:paddingVertical="6dp"
+                android:text="@string/str_reading"
+                android:textStyle="bold"
+                android:textColor="@color/color_ffffff"
+                android:textSize="13sp"
+                android:gravity="center"
+                android:clickable="true"
+                android:focusable="true"
+                android:background="@drawable/bg_header_btn" />
+        </FrameLayout>
 
-        <TextView
-            android:id="@+id/tvHeaderTranslated"
+        <FrameLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:layout_marginHorizontal="2dp"
-            android:text="@string/str_37"
-            android:textStyle="bold"
-            android:textColor="@color/color_374151"
-            android:textSize="14sp"
-            android:clickable="true"
-            android:focusable="true"
-            android:background="?attr/selectableItemBackground" />
+            android:layout_marginHorizontal="2dp">
+            <TextView
+                android:id="@+id/tvHeaderTranslated"
+                android:layout_width="64dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start|center_vertical"
+                android:paddingVertical="6dp"
+                android:text="@string/str_37"
+                android:textStyle="bold"
+                android:textColor="@color/color_ffffff"
+                android:textSize="13sp"
+                android:gravity="center"
+                android:clickable="true"
+                android:focusable="true"
+                android:background="@drawable/bg_header_btn" />
+        </FrameLayout>
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
