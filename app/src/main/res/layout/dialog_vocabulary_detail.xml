@@ -169,14 +169,15 @@
             android:orientation="horizontal"
             android:paddingVertical="16dp"
             android:gravity="center_vertical">
+
             <TextView
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
-                android:text="기억 여부"
+                android:text="암기 여부"
                 android:textColor="@color/color_6b7280"
                 android:textSize="14sp"
                 android:textStyle="bold" />
-            
+
             <TextView
                 android:id="@+id/tvMemorizedStatus"
                 android:layout_width="wrap_content"

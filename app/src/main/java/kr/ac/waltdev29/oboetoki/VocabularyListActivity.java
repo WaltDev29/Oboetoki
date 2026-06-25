@@ -2,6 +2,10 @@ package kr.ac.waltdev29.oboetoki;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Toast;
 
@@ -27,6 +31,8 @@ public class VocabularyListActivity extends BaseNavigationActivity {
 
     private ActivityVocabularyListBinding binding;
     private VocabularyAdapter adapter;
+    private Handler searchHandler = new Handler(Looper.getMainLooper());
+    private Runnable searchRunnable;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +41,7 @@ public class VocabularyListActivity extends BaseNavigationActivity {
         setContentView(binding.getRoot());
 
         setupRecyclerView();
+        setupSearchDebounce();
 
         setupBottomNavigation(binding.includedBottomNav.bottomNavView, R.id.nav_vocabulary);
         fetchWords(null, "desc");
@@ -95,6 +102,53 @@ public class VocabularyListActivity extends BaseNavigationActivity {
                     public void onFailure(@NonNull Call<List<Word>> call, @NonNull Throwable t) {
                         t.printStackTrace();
                         NotificationDialog.newInstance("오류", "단어 목록을 불러오는데 실패했습니다:\n" + t.getMessage()).show(getSupportFragmentManager(), "FetchWordsFail");
+                    }
+                });
+    }
+
+    private void setupSearchDebounce() {
+        binding.etSearch.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {}
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (searchRunnable != null) {
+                    searchHandler.removeCallbacks(searchRunnable);
+                }
+                searchRunnable = () -> {
+                    String query = s.toString().trim();
+                    if (query.isEmpty()) {
+                        fetchWords(null, "desc");
+                    } else {
+                        searchWords(query);
+                    }
+                };
+                searchHandler.postDelayed(searchRunnable, 500); // 500ms debounce
+            }
+        });
+    }
+
+    private void searchWords(String query) {
+        RetrofitClient.getWordService(basePreferenceManager)
+                .searchWords(query)
+                .enqueue(new Callback<List<Word>>() {
+                    @Override
+                    public void onResponse(@NonNull Call<List<Word>> call, @NonNull Response<List<Word>> response) {
+                        if (response.isSuccessful() && response.body() != null) {
+                            adapter.updateData(response.body());
+                        } else {
+                            NotificationDialog.newInstance("오류", "검색 결과를 불러오는데 실패했습니다.").show(getSupportFragmentManager(), "SearchWordsFail");
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(@NonNull Call<List<Word>> call, @NonNull Throwable t) {
+                        t.printStackTrace();
+                        NotificationDialog.newInstance("오류", "검색 결과를 불러오는데 실패했습니다:\n" + t.getMessage()).show(getSupportFragmentManager(), "SearchWordsFail");
                     }
                 });
     }

@@ -30,6 +30,9 @@ public interface WordService {
     @POST("words/batch")
     Call<BatchWordResponse> addWordsBatch(@Body List<Word> request);
 
+    @GET("words/search")
+    Call<List<Word>> searchWords(@Query("q") String query);
+
     @GET("words/{word_id}")
     Call<Word> getWordDetail(@Path("word_id") int wordId);
 

@@ -20,10 +20,10 @@
 
         <ImageButton
             android:id="@+id/btnFilter"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
             android:src="@drawable/ic_filter"
-            android:background="@drawable/bg_filter_btn"
+            android:background="#FFFFFF"
             android:scaleType="center"
             app:tint="@color/brand_pink_dark"
             android:contentDescription="필터" />
@@ -34,9 +34,12 @@
             android:layout_height="40dp"
             android:layout_weight="1"
             android:layout_marginStart="12dp"
-            android:background="@color/color_f3f4f6"
+            android:background="@drawable/bg_search_bar"
             android:hint="@string/str_38"
             android:paddingHorizontal="16dp"
+            android:drawableStart="@drawable/ic_search"
+            android:drawablePadding="8dp"
+            android:drawableTint="@color/brand_pink_circle"
             android:textSize="14sp"
             android:inputType="text" />
     </LinearLayout>
