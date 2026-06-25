@@ -41,6 +41,10 @@ public class SignupActivity extends AppCompatActivity {
                 Toast.makeText(this, "이메일을 입력해주세요.", Toast.LENGTH_SHORT).show();
                 return;
             }
+            if (!android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+                Toast.makeText(this, "유효한 이메일 형식이 아닙니다.", Toast.LENGTH_SHORT).show();
+                return;
+            }
             checkEmail(email);
         });
 
@@ -66,6 +70,34 @@ public class SignupActivity extends AppCompatActivity {
                 binding.btnTogglePasswordConfirm.setImageResource(R.drawable.ic_eye_off);
             }
             binding.etPasswordConfirm.setSelection(binding.etPasswordConfirm.getText().length());
+        });
+
+        binding.etPhone.addTextChangedListener(new android.text.TextWatcher() {
+            private boolean isFormatting;
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {}
+            @Override
+            public void afterTextChanged(android.text.Editable s) {
+                if (isFormatting) return;
+                isFormatting = true;
+                String digits = s.toString().replaceAll("\\D", "");
+                StringBuilder formatted = new StringBuilder();
+                if (digits.length() > 3) {
+                    formatted.append(digits.substring(0, 3)).append("-");
+                    if (digits.length() > 7) {
+                        formatted.append(digits.substring(3, 7)).append("-");
+                        formatted.append(digits.substring(7));
+                    } else {
+                        formatted.append(digits.substring(3));
+                    }
+                } else {
+                    formatted.append(digits);
+                }
+                s.replace(0, s.length(), formatted.toString());
+                isFormatting = false;
+            }
         });
 
         binding.btnSignupComplete.setOnClickListener(v -> attemptSignup());
@@ -111,6 +143,23 @@ public class SignupActivity extends AppCompatActivity {
 
         if (email.isEmpty() || password.isEmpty() || name.isEmpty() || phone.isEmpty()) {
             Toast.makeText(this, "모든 필드를 입력해주세요.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        String passwordPattern = "^(?=.*[!@#$%^&*()_+\\-=\\[\\]{};':\"\\\\|,.<>\\/?]).{8,12}$";
+        if (!password.matches(passwordPattern)) {
+            Toast.makeText(this, "비밀번호는 8자 이상 12자 이하이며 특수문자를 1개 이상 포함해야 합니다.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        if (!android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            Toast.makeText(this, "유효한 이메일 형식이 아닙니다.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        String phonePattern = "^01([0|1|6|7|8|9])-?([0-9]{3,4})-?([0-9]{4})$";
+        if (!phone.matches(phonePattern)) {
+            Toast.makeText(this, "유효한 전화번호 형식이 아닙니다.", Toast.LENGTH_SHORT).show();
             return;
         }
 

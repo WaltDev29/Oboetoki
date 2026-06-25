@@ -86,6 +86,7 @@
                     android:background="@drawable/bg_input_field"
                     android:hint="@string/str_13"
                     android:inputType="textPassword"
+                    android:maxLength="12"
                     android:paddingStart="16dp"
                     android:paddingEnd="48dp"
                     android:textColorHint="@color/color_80544247"
@@ -100,6 +101,16 @@
                     android:background="?attr/selectableItemBackgroundBorderless"
                     app:tint="@color/color_6b7280" />
             </FrameLayout>
+
+            <TextView
+                android:id="@+id/tvPasswordHint"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:layout_marginStart="4dp"
+                android:text="* 8~12자 이내, 특수문자 1개 이상 포함"
+                android:textColor="@color/color_6b7280"
+                android:textSize="12sp" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -120,6 +131,7 @@
                     android:background="@drawable/bg_input_field"
                     android:hint="비밀번호를 재입력하세요"
                     android:inputType="textPassword"
+                    android:maxLength="12"
                     android:paddingStart="16dp"
                     android:paddingEnd="48dp"
                     android:textColorHint="@color/color_80544247"
@@ -169,6 +181,7 @@
                 android:background="@drawable/bg_input_field"
                 android:hint="@string/str_010_1234_5678"
                 android:inputType="phone"
+                android:maxLength="13"
                 android:paddingHorizontal="16dp"
                 android:textColorHint="@color/color_80544247"
                 android:textSize="16sp" />
