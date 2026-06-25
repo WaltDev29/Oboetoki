@@ -207,12 +207,9 @@ public class VocabularyDetailDialog extends DialogFragment {
             @Override
             public void onResponse(@NonNull Call<Void> call, @NonNull Response<Void> response) {
                 if (response.isSuccessful()) {
-                    NotificationDialog dialog = NotificationDialog.newInstance("알림", "단어가 삭제되었습니다.");
-                    dialog.setOnDismissAction(() -> {
-                        if (listener != null) listener.onWordChanged();
-                        dismiss();
-                    });
-                    dialog.show(getChildFragmentManager(), "DeleteSuccess");
+                    Toast.makeText(requireContext(), "단어가 삭제되었습니다.", Toast.LENGTH_SHORT).show();
+                    if (listener != null) listener.onWordChanged();
+                    dismiss();
                 } else {
                     NotificationDialog.newInstance("오류", "단어 삭제 실패").show(getChildFragmentManager(), "DeleteFail");
                 }
