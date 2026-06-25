@@ -49,6 +49,15 @@ public class VocabularyListActivity extends BaseNavigationActivity {
         setupSearchDebounce();
 
         setupBottomNavigation(binding.includedBottomNav.bottomNavView, R.id.nav_vocabulary);
+
+        binding.fabAddWord.setOnClickListener(v -> {
+            VocabularyAddDialog dialog = VocabularyAddDialog.newInstance(sourceLanguage);
+            dialog.setOnWordAddedListener(() -> {
+                fetchWords(null, "desc");
+            });
+            dialog.show(getSupportFragmentManager(), "VocabularyAddDialog");
+        });
+
         fetchWords(null, "desc");
     }
 
