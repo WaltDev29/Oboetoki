@@ -35,6 +35,8 @@ public class SignupActivity extends AppCompatActivity {
 
         preferenceManager = new PreferenceManager(this);
 
+        binding.btnBack.setOnClickListener(v -> finish());
+
         binding.btnCheckEmail.setOnClickListener(v -> {
             String email = binding.etEmail.getText().toString().trim();
             if (email.isEmpty()) {
