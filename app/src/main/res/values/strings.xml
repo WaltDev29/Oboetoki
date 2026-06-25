@@ -3,16 +3,11 @@
     <string name="app_name">Oboetoki</string>
     <string name="app_title">Oboetoki</string>
     
-    <string name="action_take_photo">사진 촬영</string>
-    <string name="action_gallery">갤러리</string>
-    <string name="action_extract_words">단어 추출하기</string>
     <string name="action_add_all">모두 추가</string>
     <string name="action_cancel">취소</string>
     <string name="action_login">로그인</string>
     <string name="action_signup">회원가입</string>
     <string name="action_check_duplicate">중복확인</string>
-    <string name="action_do_signup">회원가입</string>
-    <string name="action_signup_cancel">취소</string>
     <string name="action_logout">로그아웃</string>
     <string name="action_confirm">확인</string>
     <string name="action_save">저장</string>
@@ -33,9 +28,6 @@
     <string name="label_language_select">언어 선택</string>
 
     <string name="hint_enter_password">비밀번호를 입력하세요</string>
-    <string name="hint_signup_id">아이디를 입력하세요</string>
-    <string name="hint_signup_password">비밀번호를 입력하세요</string>
-    <string name="hint_signup_password_confirm">비밀번호를 다시 입력하세요</string>
     <string name="hint_name">이름을 입력하세요</string>
     <string name="hint_phone">010-1234-5678</string>
     <string name="hint_search_word">단어 검색</string>

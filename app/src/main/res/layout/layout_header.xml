@@ -46,7 +46,7 @@
             android:layout_marginEnd="8dp"
             android:src="@drawable/ic_my_page"
             android:background="?attr/selectableItemBackgroundBorderless"
-            android:tint="@color/brand_pink_dark" />
+            app:tint="@color/brand_pink_dark" />
 
     </androidx.appcompat.widget.Toolbar>
 

@@ -39,7 +39,7 @@
                 android:layout_height="32dp"
                 android:src="@android:drawable/ic_menu_delete"
                 android:background="?attr/selectableItemBackgroundBorderless"
-                android:tint="@color/gray_500" />
+                app:tint="@color/gray_500" />
                 
             <Space android:layout_width="8dp" android:layout_height="wrap_content" />
             
@@ -49,7 +49,7 @@
                 android:layout_height="32dp"
                 android:src="@drawable/ic_close"
                 android:background="?attr/selectableItemBackgroundBorderless"
-                android:tint="@color/gray_500" />
+                app:tint="@color/gray_500" />
         </LinearLayout>
     </LinearLayout>
 
