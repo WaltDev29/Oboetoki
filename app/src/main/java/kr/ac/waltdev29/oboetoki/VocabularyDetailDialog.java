@@ -113,6 +113,21 @@ public class VocabularyDetailDialog extends DialogFragment {
         binding.etReading.addTextChangedListener(textWatcher);
         binding.etMeaning.addTextChangedListener(textWatcher);
 
+        binding.btnEditOriginalWord.setOnClickListener(v -> enableEditing(binding.etOriginalWord));
+        binding.btnEditReading.setOnClickListener(v -> enableEditing(binding.etReading));
+        binding.btnEditMeaning.setOnClickListener(v -> enableEditing(binding.etMeaning));
+
+        setupEditTextFocus(binding.etOriginalWord);
+        setupEditTextFocus(binding.etReading);
+        setupEditTextFocus(binding.etMeaning);
+
+        view.setOnTouchListener((v, event) -> {
+            if (binding.etOriginalWord.isFocused()) disableEditing(binding.etOriginalWord);
+            if (binding.etReading.isFocused()) disableEditing(binding.etReading);
+            if (binding.etMeaning.isFocused()) disableEditing(binding.etMeaning);
+            return false;
+        });
+
         binding.btnConfirm.setOnClickListener(v -> {
             if (isEdited) {
                 updateWordDetails();
@@ -127,6 +142,51 @@ public class VocabularyDetailDialog extends DialogFragment {
                 deleteWord();
             });
             confirmDialog.show(getChildFragmentManager(), "DeleteConfirm");
+        });
+    }
+
+    private void enableEditing(android.widget.EditText editText) {
+        editText.setFocusable(true);
+        editText.setFocusableInTouchMode(true);
+        editText.setCursorVisible(true);
+        editText.requestFocus();
+        
+        android.view.inputmethod.InputMethodManager imm = (android.view.inputmethod.InputMethodManager) requireContext().getSystemService(android.content.Context.INPUT_METHOD_SERVICE);
+        if (imm != null) {
+            imm.showSoftInput(editText, android.view.inputmethod.InputMethodManager.SHOW_IMPLICIT);
+            editText.setSelection(editText.getText().length());
+        }
+    }
+
+    private void disableEditing(android.widget.EditText editText) {
+        editText.setFocusable(false);
+        editText.setFocusableInTouchMode(false);
+        editText.setCursorVisible(false);
+        
+        if (getView() != null) {
+            getView().requestFocus();
+        }
+        editText.clearFocus();
+        
+        android.view.inputmethod.InputMethodManager imm = (android.view.inputmethod.InputMethodManager) requireContext().getSystemService(android.content.Context.INPUT_METHOD_SERVICE);
+        if (imm != null) {
+            imm.hideSoftInputFromWindow(editText.getWindowToken(), 0);
+        }
+    }
+
+    private void setupEditTextFocus(android.widget.EditText editText) {
+        editText.setOnEditorActionListener((v, actionId, event) -> {
+            if (actionId == android.view.inputmethod.EditorInfo.IME_ACTION_DONE) {
+                disableEditing(editText);
+                return true;
+            }
+            return false;
+        });
+        
+        editText.setOnFocusChangeListener((v, hasFocus) -> {
+            if (!hasFocus) {
+                disableEditing(editText);
+            }
         });
     }
 

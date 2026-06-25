@@ -5,7 +5,6 @@
     android:orientation="horizontal"
     android:layout_marginBottom="8dp"
     android:padding="12dp"
-    android:background="@drawable/bg_bottom_sheet"
     android:elevation="2dp"
     android:gravity="center_vertical">
 
@@ -17,16 +16,15 @@
         android:hint="원어"
         android:textColor="@color/color_111827"
         android:textSize="16sp"
-        android:background="@android:color/transparent"
+        android:background="@drawable/bg_ocr_input"
+        android:padding="8dp"
         android:textStyle="bold"
         android:maxLines="1"
         android:inputType="text" />
         
-    <View
-        android:layout_width="1dp"
-        android:layout_height="24dp"
-        android:layout_marginHorizontal="8dp"
-        android:background="@color/color_e5e7eb" />
+    <Space
+        android:layout_width="4dp"
+        android:layout_height="wrap_content" />
 
     <EditText
         android:id="@+id/etReading"
@@ -36,15 +34,14 @@
         android:hint="발음"
         android:textColor="@color/color_6b7280"
         android:textSize="14sp"
-        android:background="@android:color/transparent"
+        android:background="@drawable/bg_ocr_input"
+        android:padding="8dp"
         android:maxLines="1"
         android:inputType="text" />
         
-    <View
-        android:layout_width="1dp"
-        android:layout_height="24dp"
-        android:layout_marginHorizontal="8dp"
-        android:background="@color/color_e5e7eb" />
+    <Space
+        android:layout_width="4dp"
+        android:layout_height="wrap_content" />
 
     <EditText
         android:id="@+id/etMeaning"
@@ -54,7 +51,8 @@
         android:hint="뜻"
         android:textColor="@color/color_4b5563"
         android:textSize="15sp"
-        android:background="@android:color/transparent"
+        android:background="@drawable/bg_ocr_input"
+        android:padding="8dp"
         android:maxLines="1"
         android:inputType="text" />
 
