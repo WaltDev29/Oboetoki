@@ -96,6 +96,8 @@ public abstract class BaseNavigationActivity extends AppCompatActivity {
         basePreferenceManager = new PreferenceManager(this);
     }
 
+    private long lastNavClickTime = 0;
+
     protected void setupBottomNavigation(BottomNavigationView bottomNavigationView, int currentItemId) {
         if (currentItemId != -1) {
             bottomNavigationView.getMenu().findItem(currentItemId).setChecked(true);
@@ -108,6 +110,12 @@ public abstract class BaseNavigationActivity extends AppCompatActivity {
         }
 
         bottomNavigationView.setOnItemSelectedListener(item -> {
+            long currentClickTime = android.os.SystemClock.uptimeMillis();
+            if (currentClickTime - lastNavClickTime < 500) {
+                return false;
+            }
+            lastNavClickTime = currentClickTime;
+
             int itemId = item.getItemId();
             if (itemId == R.id.nav_home) {
                 if (currentItemId != R.id.nav_home) {
